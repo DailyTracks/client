@@ -1,7 +1,9 @@
+import Map from "../componets/Map";
+
 export default function Home() {
   return (
     <div>
-      <h1>DailyTasks</h1>
+      <Map></Map>
     </div>
   );
 }
