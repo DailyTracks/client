@@ -1,0 +1,11 @@
+.hashtag-container {
+  display: flex;
+  gap: 1rem;
+  padding: 0 0.5rem;
+  justify-content: flex-end;
+}
+
+.hashtag {
+  color: #808080;
+  font-size: 0.8rem;
+}

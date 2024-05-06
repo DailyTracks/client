@@ -1,0 +1,189 @@
+* {
+  box-sizing: border-box;
+  list-style: none;
+}
+
+.header {
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid black;
+}
+
+.logo {
+  text-decoration: none;
+  font-size: 2rem;
+  line-height: 60px;
+  padding: 0 2rem;
+  color: black;
+  font-weight: bold;
+}
+
+.entryarea {
+  position: relative;
+  width: 400px;
+  height: 50px;
+  line-height: 40px;
+}
+
+.search {
+  position: absolute;
+  width: 100%;
+  outline: none;
+  font-size: 1rem;
+  padding: 0 2rem;
+  line-height: 50px;
+  border-radius: 1rem;
+  border: 2px solid rgb(146, 146, 143);
+  background: transparent;
+  transform: 0.1s ease;
+}
+
+.searchlabel {
+  position: absolute;
+  font-size: 1rem;
+  line-height: 50px;
+  color: rgb(146, 146, 143);
+  padding: 0 0.5rem;
+  margin: 0 1rem;
+  background-color: transparent;
+  transition: 0.2s ease;
+}
+
+.search:focus,
+.search:valid {
+  color: black;
+  border: 4px solid black;
+}
+
+.search:focus + .searchlabel,
+.search:valid + .searchlabel {
+  color: black;
+  height: 30px;
+  line-height: 30px;
+  background-color: white;
+  transform: translate(-0.3rem, -0.8rem) scale(0.85);
+}
+
+.auth {
+  display: flex;
+  gap: 2rem;
+  padding: 0 2rem;
+}
+
+.auth a {
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 0 2rem;
+  color: #808080;
+  letter-spacing: 0.2rem;
+}
+
+.auth a:hover,
+.auth a.active {
+  color: black;
+  text-decoration: underline;
+}
+
+@media all and (min-width: 1024px) {
+}
+
+/* 테블릿 가로, 테블릿 세로 (해상도 768px ~ 1023px)*/
+@media all and (min-width: 768px) and (max-width: 1023px) {
+  .logo {
+    padding: 0 1.5rem;
+    font-size: 1.7rem;
+  }
+  .entryarea {
+    width: 300px;
+  }
+  .search {
+    padding: 0 1.5rem;
+  }
+  .auth {
+    gap: 0rem;
+    padding: 0;
+  }
+  .auth a {
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+}
+
+/* 모바일 가로, 모바일 세로 (해상도 480px ~ 767px)*/
+@media all and (max-width: 767px) {
+  .header {
+    height: max-content;
+    display: inline-block;
+    text-align: center;
+  }
+  .logo {
+    padding: 0 1.5rem;
+    font-size: 1.7rem;
+  }
+  .entryarea {
+    width: 40%;
+    margin-bottom: 1rem;
+  }
+  .search {
+    width: 150%;
+    padding: 0 1rem;
+  }
+  .searchlabel {
+    width: 150%;
+    font-size: 1rem;
+    padding: 0;
+    margin: 0;
+  }
+  .search:focus + .searchlabel,
+  .search:valid + .searchlabel {
+    color: black;
+    height: 30px;
+    line-height: 30px;
+    background-color: white;
+    letter-spacing: 0.3rem;
+    transform: translate(-0.3rem, -0.9rem) scale(0.8);
+  }
+  .auth {
+    gap: 0rem;
+    padding: 0.5rem 0;
+    justify-content: space-around;
+  }
+  .auth a {
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+}
+
+@media all and (max-width: 480px) {
+  .entryarea {
+    width: 20%;
+  }
+  .search {
+    width: 400%;
+    line-height: 40px;
+  }
+  .searchlabel {
+    width: 400%;
+    height: 40px;
+    line-height: 40px;
+    font-size: 0.8rem;
+  }
+  .search:focus + .searchlabel,
+  .search:valid + .searchlabel {
+    color: black;
+    height: 30px;
+    line-height: 30px;
+    background-color: white;
+    transform: translate(-0.3rem, -0.9rem) scale(0.8);
+  }
+  .auth a {
+    font-size: 0.8rem;
+    padding: 0 1rem;
+  }
+}
