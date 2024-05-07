@@ -1,2 +1,18 @@
-.leaflet-container {
+.new_btn {
+  font-size: 1.2rem;
+  right: 2rem;
+  top: 2rem;
+  padding: 0.3rem 0.6rem;
+  position: absolute;
+  color: white;
+  text-decoration: none;
+  background-color: slategrey;
+  border-radius: 0.5rem;
+  z-index: 1111;
+}
+
+.new_btn:hover {
+  box-shadow: 0 0 0 1px transparent, 0 0 0 4px transparent,
+    0 6px 16px rgba(0, 0, 0, 0.2) !important;
+  transform: scale(1.05);
 }

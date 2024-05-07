@@ -13,6 +13,10 @@ function Map() {
     // navigate(`/board?region=${regionTerm}`);
   };
 
+  function openNewBoardPage() {
+    navigate("/board/new");
+  }
+
   const configMap = {
     center: [36.5, 127.5],
     zoom: 7,
@@ -97,6 +101,9 @@ function Map() {
           },
         }}
       />
+      <button onClick={openNewBoardPage} className="new_btn">
+        New
+      </button>
     </MapContainer>
   );
 }

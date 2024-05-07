@@ -1,5 +1,5 @@
 import classes from "../styles/BoardNavigation.module.css";
-import { Link, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 function BoardNavigation() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -10,7 +10,6 @@ function BoardNavigation() {
     <header className={classes.header}>
       <nav className={classes.nav}>
         <div>{regionName}</div>
-        <Link to={"/board/new"}>New</Link>
         <div className={classes.orders}>
           <label htmlFor="order" className={classes.orderlabel}>
             정렬
