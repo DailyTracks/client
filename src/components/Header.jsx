@@ -17,7 +17,7 @@ function Header() {
       <ul className={classes.auth}>
         <li>
           <NavLink
-            to="/login"
+            to="/auth?mode=login"
             className={({ isActive }) =>
               isActive ? classes.active : undefined
             }
@@ -29,7 +29,7 @@ function Header() {
 
         <li>
           <NavLink
-            to="/signup"
+            to="/auth?mode=signup"
             className={({ isActive }) =>
               isActive ? classes.active : undefined
             }

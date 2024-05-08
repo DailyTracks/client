@@ -3,7 +3,7 @@ import Board from "../components/Board";
 import { useSearchParams } from "react-router-dom";
 
 function BoardsList({ boards }) {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const regionName = searchParams.get("region");
 
   return (
