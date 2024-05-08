@@ -2,7 +2,7 @@ import classes from "../styles/BoardNavigation.module.css";
 import { useSearchParams } from "react-router-dom";
 
 function BoardNavigation() {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
   const regionName = searchParams.get("region");
 
@@ -27,7 +27,7 @@ function BoardNavigation() {
               </option>
             </select>
             <div className={classes.icon}>
-              <i class="fa-solid fa-chevron-down"></i>
+              <i className="fa-solid fa-chevron-down"></i>
             </div>
           </div>
         </div>

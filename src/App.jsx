@@ -10,7 +10,7 @@ import Boards, { loader as boardsLoader } from "./pages/Boards";
 import NewBoard from "./pages/NewBoard";
 import EditBoard from "./pages/EditBoard";
 import { action as boardFormAction } from "./components/BoardForm";
-import Header from "./components/Header";
+import Authentication from "./pages/Authentication";
 
 const router = createBrowserRouter([
   {
@@ -52,13 +52,8 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "login",
-    element: (
-      <>
-        <Header />
-        <h2>login</h2>
-      </>
-    ),
+    path: "/auth",
+    element: <Authentication />,
   },
 ]);
 
