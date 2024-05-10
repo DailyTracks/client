@@ -18,32 +18,16 @@ function Boards() {
   }, [events]);
 
   return (
-    <div>
-      {loadedBoards ? (
-        <BoardsList boards={loadedBoards} />
-      ) : (
-        <p style={{ textAlign: "center" }}>Loading...</p>
-      )}
-    </div>
+    <>
+      <div>
+        {loadedBoards ? (
+          <BoardsList boards={loadedBoards} />
+        ) : (
+          <p style={{ textAlign: "center" }}>Loading...</p>
+        )}
+      </div>
+    </>
   );
-
-  // const { events } = useRouteLoaderData("boards");
-  // events
-  //   .then((result) => {
-  //     console.log(result);
-  //     return <BoardsList boards={result} />;
-  //   })
-  //   .catch((error) => {
-  //     return <p>Error {error}</p>;
-  //   });
-
-  // return (
-  //   <Suspense fallback={<p style={{ textAlign: "center" }}>Loading...</p>}>
-  //     <Await resolve={resData}>
-  //       {(loadedBoards) => <BoardsList boards={loadedBoards} />}
-  //     </Await>
-  //   </Suspense>
-  // );
 }
 
 export default Boards;
@@ -67,8 +51,8 @@ async function loadBoards(regionTerm) {
     );
   } else {
     const resData = await response.json();
-    // console.log(resData);
-    return await resData;
+    // return await resData;
+    return resData;
   }
 }
 

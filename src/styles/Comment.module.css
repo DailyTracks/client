@@ -1,0 +1,41 @@
+.comment {
+  border: 2px solid blue;
+  padding: 10px;
+  margin-bottom: 1rem;
+}
+
+.username {
+  margin: 0;
+}
+
+.content {
+  margin: 0
+}
+
+.time {
+  margin: 0;
+}
+
+.delete {
+  margin: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  background-color: brown;
+  color: aliceblue;
+}
+
+.edit {
+  text-decoration: none;
+  margin: 1rem;
+  margin: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  border: 1px solid black;
+}
+
+.back {
+  margin: 1rem;
+  margin: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+}

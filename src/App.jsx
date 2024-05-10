@@ -11,6 +11,13 @@ import NewBoard from "./pages/NewBoard";
 import EditBoard from "./pages/EditBoard";
 import { action as boardFormAction } from "./components/BoardForm";
 import Authentication from "./pages/Authentication";
+import CommentRoot from "./pages/CommentRoot";
+import CommentDetail, {
+  action as deleteCommentAction,
+} from "./pages/CommentDetail";
+import { action as commentFormAction } from "./components/CommentForm";
+import EditComment from "./pages/EditComment";
+import NewComment from "./pages/NewComment";
 
 const router = createBrowserRouter([
   {
@@ -36,9 +43,31 @@ const router = createBrowserRouter([
                 action: deleteBoardAction,
               },
               {
+                path: ":commentId",
+                id: "comment-detail",
+                element: <CommentRoot />,
+                children: [
+                  {
+                    index: true,
+                    element: <CommentDetail />,
+                    action: deleteCommentAction,
+                  },
+                  {
+                    path: "edit",
+                    element: <EditComment />,
+                    action: commentFormAction,
+                  },
+                ],
+              },
+              {
                 path: "edit",
                 element: <EditBoard />,
                 action: boardFormAction,
+              },
+              {
+                path: "new",
+                element: <NewComment />,
+                action: commentFormAction,
               },
             ],
           },
