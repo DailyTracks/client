@@ -5,18 +5,23 @@ import {
   json,
   redirect,
   defer,
+  useNavigate,
 } from "react-router-dom";
 import classes from "../styles/BoardDetail.module.css";
 import { useState, useEffect } from "react";
+import CommentsList from "../components/CommentsList";
 
 function BoardDetail() {
   const [loadedBoard, setLoadedBoard] = useState(null);
+  const [comments, setComments] = useState(null);
   const { board } = useRouteLoaderData("board-detail");
+  const navigate = useNavigate();
 
   useEffect(() => {
     board
       .then((result) => {
         setLoadedBoard(result);
+        setComments(result.comments);
       })
       .catch((error) => {
         console.error("Error occurred:", error);
@@ -34,30 +39,41 @@ function BoardDetail() {
   }
 
   return (
-    <div>
-      {loadedBoard ? (
-        <div>
-          <p>DetailPage</p>
+    <>
+      <div className={classes.board}>
+        {loadedBoard ? (
           <div>
-            <p className={classes.title}>{loadedBoard.title}</p>
-            <p className={classes.region}>{loadedBoard.region}</p>
-            <p className={classes.content}>{loadedBoard.content}</p>
+            <div>
+              <p className={classes.title}>{loadedBoard.title}</p>
+              <p className={classes.region}>{loadedBoard.region}</p>
+              <p className={classes.content}>{loadedBoard.content}</p>
+            </div>
+            <button className={classes.delete} onClick={deleteHandler}>
+              Delete
+            </button>
+            <Link to="edit" className={classes.edit}>
+              Edit
+            </Link>
+            <button
+              onClick={() => {
+                navigate(-1);
+              }}
+              className={classes.back}
+            >
+              Back
+            </button>
           </div>
-          <button className={classes.delete} onClick={deleteHandler}>
-            Delete
-          </button>
-          <Link to="edit" className={classes.edit}>
-            Edit
-          </Link>
-
-          <Link to="/board" className={classes.back}>
-            Back
-          </Link>
-        </div>
-      ) : (
-        <p style={{ textAlign: "center" }}>Loading...</p>
-      )}
-    </div>
+        ) : (
+          <p style={{ textAlign: "center" }}>Loading...</p>
+        )}
+      </div>
+      <div className={classes.new_box}>
+        <Link to="new" className={classes.new}>
+          Comment 추가하기
+        </Link>
+      </div>
+      {comments && <CommentsList comments={comments} />}
+    </>
   );
 }
 

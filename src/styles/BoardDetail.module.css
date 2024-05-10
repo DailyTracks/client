@@ -1,3 +1,9 @@
+.board {
+  border: 2px solid yellowgreen;
+  padding: 10px 10px;
+  margin-bottom: 1rem;
+}
+
 .title {
   font-size: 1.3rem;
 }
@@ -28,4 +34,19 @@
   margin: 1rem;
   border: 1px solid black;
   padding: 0.2rem 0.5rem;
+}
+
+.new_box {
+  text-align: center;
+  margin: 1rem;
+}
+
+.new {
+  text-decoration: none;
+  font-size: 1.2rem;
+  border: 1px solid yellowgreen;
+  border-radius: 0.5rem;
+  background-color: yellowgreen;
+  color: white;
+  padding: 5px 10px;
 }
