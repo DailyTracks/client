@@ -85,9 +85,19 @@
 }
 
 .auth a:hover,
+.auth button:hover,
 .auth a.active {
   color: black;
   text-decoration: underline;
+}
+
+.auth button {
+  border:  none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 0 2rem;
+  color: #808080;
+  background-color: transparent;
 }
 
 @media all and (min-width: 1024px) {

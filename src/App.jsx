@@ -18,6 +18,7 @@ import CommentDetail, {
 import { action as commentFormAction } from "./components/CommentForm";
 import EditComment from "./pages/EditComment";
 import NewComment from "./pages/NewComment";
+import { action as profileAction } from "./components/AuthForm";
 
 const router = createBrowserRouter([
   {
@@ -83,6 +84,7 @@ const router = createBrowserRouter([
   {
     path: "/auth",
     element: <Authentication />,
+    action: profileAction,
   },
 ]);
 

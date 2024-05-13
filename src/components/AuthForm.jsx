@@ -1,50 +1,12 @@
-// import { Form, Link, useSearchParams } from "react-router-dom";
-
-// import classes from "../styles/AuthForm.module.css";
-// import Naver from "./Naver";
-
-// function AuthForm() {
-//   const [searchParams] = useSearchParams();
-//   const isLogin = searchParams.get("mode") === "login";
-
-//   return (
-//     <>
-//       <Form method="post" className={classes.form}>
-//         <h1>{isLogin ? "Log in" : "Create a new user"}</h1>
-//         <p>
-//           <label htmlFor="email">Email</label>
-//           <input id="email" type="email" name="email" required />
-//         </p>
-//         {!isLogin && (
-//           <p>
-//             <label htmlFor="username">Username</label>
-//             <input id="username" type="text" name="username" required />
-//           </p>
-//         )}
-//         <p>
-//           <label htmlFor="image">Password</label>
-//           <input id="password" type="password" name="password" required />
-//         </p>
-//         <div className={classes.actions}>
-//           <Link to={`?mode=${isLogin ? "signup" : "login"}`}>
-//             {isLogin ? "Create new user" : "Login"}
-//           </Link>
-//           <button>Save</button>
-//         </div>
-//         <Naver />
-//       </Form>
-//     </>
-//   );
-// }
-
-// export default AuthForm;
-
-import { Form, Link, useSearchParams } from "react-router-dom";
-
+import { Form, useSearchParams } from "react-router-dom";
 import classes from "../styles/AuthForm.module.css";
 import NaverLogin from "./Naver";
 import { useEffect, useState } from "react";
+import { redirect } from "react-router-dom";
+import { authActions } from "../store/auth-slice";
+import store from "../store/index";
 import axios from "axios";
+
 function AuthForm() {
   const [searchParams] = useSearchParams();
   const isLogin = searchParams.get("mode") === "login";
@@ -80,16 +42,21 @@ function AuthForm() {
 
     fetchData();
   }, []);
-  const createProfile = async (e) => {
-    const res = await axios.post(
-      `http://localhost:8080/api/user/${id}/profile`,
-      {
-        userId: userId,
-        password: password,
-      }
-    );
-    console.log(res.data);
-  };
+  // const createProfile = async (e) => {
+  //   const res = await axios.post(
+  //     `http://localhost:8080/api/user/${id}/profile`,
+  //     // `/api/user/${id}/profile`,
+  //     {
+  //       id: id,
+  //       userId: userId,
+  //       password: password,
+  //     },
+  //     {
+  //       withCredentials: true,
+  //     }
+  //   );
+  //   console.log(res.data);
+  // };
   return (
     <>
       <Form method="post" className={classes.form}>
@@ -106,6 +73,10 @@ function AuthForm() {
                 name="provider"
                 readOnly
               />
+            </p>
+            <p style={{ display: "none" }}>
+              <label htmlFor="id">Provider</label>
+              <input id="id" value={id} type="text" name="id" readOnly />
             </p>
             <p>
               <label htmlFor="username">Username</label>
@@ -150,33 +121,21 @@ function AuthForm() {
                 required
               />
             </p>
-            <button onClick={(e) => createProfile(e)}>확인</button>
+            {/* <button onClick={(e) => createProfile(e)}>확인</button> */}
+            {/* <button onClick={createProfile}>확인</button> */}
+            <button>저장</button>
           </>
         ) : (
           <>
             <p>
               {/* 추후 userid와 email 동시 운용 */}
-              <label htmlFor="userId">Email</label>
-              <input
-                id="userId"
-                type="text"
-                name="userId"
-                value={userId}
-                onChange={(e) => setUserId(e.target.value)}
-                required
-              />
+              <label htmlFor="email">Email</label>
+              <input id="email" type="email" name="email" required />
             </p>
 
             <p>
               <label htmlFor="password">Password</label>
-              <input
-                id="password"
-                type="password"
-                name="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
+              <input id="password" type="password" name="password" required />
             </p>
 
             <NaverLogin />
@@ -184,7 +143,7 @@ function AuthForm() {
         )}
 
         <div className={classes.actions}>
-          <button style={btnStyle}>{isLogin ? "로그인" : "회원가입"}</button>
+          <button style={btnStyle}>로그인</button>
         </div>
       </Form>
     </>
@@ -192,3 +151,77 @@ function AuthForm() {
 }
 
 export default AuthForm;
+
+export async function action({ request, params }) {
+  // const method = request.method;
+  const data = await request.formData();
+  const id = data.get("id");
+
+  const mode = new URL(request.url).searchParams.get("mode");
+
+  if (mode === "signup") {
+    const x = {
+      id: data.get("id"),
+      userId: data.get("userId"),
+      password: data.get("password"),
+    };
+    console.log(x);
+
+    const response = await axios.post(
+      `http://localhost:8080/api/user/${id}/profile`,
+      {
+        userId: data.get("userId"),
+        password: data.get("password"),
+      },
+      {
+        headers: {
+          "Content-type": "application/json",
+          Accept: "application/json",
+        },
+      }
+    );
+
+    console.log(response);
+
+    alert("회원가입이 완료되었습니다. 로그인 해주세요.");
+
+    return redirect("..");
+  } else if (mode === "login") {
+    const dispatch = store.dispatch;
+    // const response = await axios.get(
+    //   `http://localhost:8080/api/auth`,
+    //   {
+    //     params: {
+    //       user: {
+    //         email: data.get("email"),
+    //         password: data.get("password"),
+    //       },
+    //     },
+    //   },
+    //   { withCredentials: true }
+    // );
+
+    const response = await axios.post(
+      `http://localhost:8080/api/auth`,
+      {
+        user: {
+          email: data.get("email"),
+          password: data.get("password"),
+        },
+      },
+      { withCredentials: true }
+    );
+
+    if (response.data.isLogin) {
+      dispatch(authActions.login());
+      console.log("로그인 성공");
+    } else {
+      dispatch(authActions.logout());
+      console.log("로그인 실패");
+      return;
+    }
+    return redirect("..");
+  } else {
+    throw new Error({ message: "Auth Mode Error" });
+  }
+}
