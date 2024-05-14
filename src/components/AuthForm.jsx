@@ -42,21 +42,7 @@ function AuthForm() {
 
     fetchData();
   }, []);
-  // const createProfile = async (e) => {
-  //   const res = await axios.post(
-  //     `http://localhost:8080/api/user/${id}/profile`,
-  //     // `/api/user/${id}/profile`,
-  //     {
-  //       id: id,
-  //       userId: userId,
-  //       password: password,
-  //     },
-  //     {
-  //       withCredentials: true,
-  //     }
-  //   );
-  //   console.log(res.data);
-  // };
+
   return (
     <>
       <Form method="post" className={classes.form}>
@@ -188,38 +174,25 @@ export async function action({ request, params }) {
     return redirect("..");
   } else if (mode === "login") {
     const dispatch = store.dispatch;
-    // const response = await axios.get(
-    //   `http://localhost:8080/api/auth`,
-    //   {
-    //     params: {
-    //       user: {
-    //         email: data.get("email"),
-    //         password: data.get("password"),
-    //       },
-    //     },
-    //   },
-    //   { withCredentials: true }
-    // );
-
     const response = await axios.post(
-      `http://localhost:8080/api/auth`,
+      `http://localhost:8080/api/auth/login`,
       {
-        user: {
-          email: data.get("email"),
-          password: data.get("password"),
-        },
+        userId: data.get("email"),
+        password: data.get("password"),
       },
       { withCredentials: true }
     );
 
-    if (response.data.isLogin) {
+    if (response.data.message === "로그인 성공") {
       dispatch(authActions.login());
-      console.log("로그인 성공");
     } else {
-      dispatch(authActions.logout());
-      console.log("로그인 실패");
-      return;
+      // 로그인 실패
+      alert("이메일 또는 비밀번호가 유효하지 않습니다.");
+      return null;
     }
+
+    console.log(response.data);
+
     return redirect("..");
   } else {
     throw new Error({ message: "Auth Mode Error" });
