@@ -10,12 +10,18 @@ import axios from "axios";
 function AuthForm() {
   const [searchParams] = useSearchParams();
   const isLogin = searchParams.get("mode") === "login";
-  const [provider, setProvider] = useState("");
-  const [id, setId] = useState("");
-  const [userId, setUserId] = useState("");
-  const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  // const [provider, setProvider] = useState("");
+  // const [id, setId] = useState("");
+  // const [userId, setUserId] = useState("");
+  // const [password, setPassword] = useState("");
+  // const [name, setName] = useState("");
+  // const [email, setEmail] = useState("");
+  const [userData, setUserData] = useState({
+    provider: "",
+    name: "",
+    email: "",
+    id: "",
+  });
   const btnStyle = {
     display: isLogin ? "block" : "none",
   };
@@ -31,10 +37,16 @@ function AuthForm() {
 
         const { id, oauth_provider, username, email } = res.data.user;
         console.log(id, oauth_provider, username, email);
-        setProvider(oauth_provider);
-        setName(username);
-        setEmail(email);
-        setId(id);
+        // setProvider(oauth_provider);
+        // setName(username);
+        // setEmail(email);
+        // setId(id);
+        setUserData({
+          provider: oauth_provider,
+          name: username,
+          email: email,
+          id: id,
+        });
       } catch (error) {
         console.error(error);
       }
@@ -54,21 +66,27 @@ function AuthForm() {
               <label htmlFor="provider">Provider</label>
               <input
                 id="provider"
-                value={provider}
+                value={userData.provider}
                 type="text"
                 name="provider"
                 readOnly
               />
             </p>
             <p style={{ display: "none" }}>
-              <label htmlFor="id">Provider</label>
-              <input id="id" value={id} type="text" name="id" readOnly />
+              <label htmlFor="id">id</label>
+              <input
+                id="id"
+                value={userData.id}
+                type="text"
+                name="id"
+                readOnly
+              />
             </p>
             <p>
               <label htmlFor="username">Username</label>
               <input
                 id="username"
-                value={name}
+                value={userData.name}
                 type="text"
                 name="username"
                 readOnly
@@ -77,7 +95,7 @@ function AuthForm() {
             <p>
               <label htmlFor="email">Email</label>
               <input
-                value={email}
+                value={userData.email}
                 id="email"
                 type="email"
                 name="email"
@@ -90,8 +108,8 @@ function AuthForm() {
                 id="userId"
                 type="text"
                 name="userId"
-                value={userId}
-                onChange={(e) => setUserId(e.target.value)}
+                // value={userId}
+                // onChange={(e) => setUserId(e.target.value)}
                 required
               />
             </p>
@@ -102,8 +120,8 @@ function AuthForm() {
                 id="password"
                 type="password"
                 name="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                // value={password}
+                // onChange={(e) => setPassword(e.target.value)}
                 required
               />
             </p>
@@ -151,7 +169,6 @@ export async function action({ request, params }) {
       userId: data.get("userId"),
       password: data.get("password"),
     };
-    console.log(x);
 
     const response = await axios.post(
       `http://localhost:8080/api/user/${id}/profile`,
@@ -164,10 +181,9 @@ export async function action({ request, params }) {
           "Content-type": "application/json",
           Accept: "application/json",
         },
-      }
+      },
+      { withCredentials: true }
     );
-
-    console.log(response);
 
     alert("회원가입이 완료되었습니다. 로그인 해주세요.");
 
@@ -191,7 +207,8 @@ export async function action({ request, params }) {
       return null;
     }
 
-    console.log(response.data);
+    sessionStorage.setItem("isLogin", "true");
+    sessionStorage.setItem("user", JSON.stringify(response.data.user));
 
     return redirect("..");
   } else {

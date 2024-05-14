@@ -1,8 +1,4 @@
-import { useEffect } from "react";
-
 function Naver() {
-  const { naver } = window;
-
   const handlerLogin = (e) => {
     window.location.href = "http://localhost:8080/api/auth/join/naver";
   };

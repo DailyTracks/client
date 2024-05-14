@@ -1,15 +1,29 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../store/auth-slice";
 import classes from "../styles/Header.module.css";
+import { useEffect } from "react";
 
 function Header() {
-  const isLogin = useSelector((state) => state.auth.isLogin);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (window.sessionStorage.getItem("isLogin") === "true") {
+      dispatch(authActions.login());
+    } else {
+      dispatch(authActions.logout());
+    }
+  }, []);
+
+  const isLogin = useSelector((state) => state.auth.isLogin);
 
   function logoutHandler() {
     if (window.confirm("로그아웃 하시겠습니까?")) {
+      sessionStorage.removeItem("user");
+      sessionStorage.setItem("isLogin", "false");
       dispatch(authActions.logout());
+      navigate("/");
     }
   }
 
@@ -43,7 +57,7 @@ function Header() {
           <>
             <li>
               <NavLink
-                to="/user/profile"
+                to="/mypage"
                 className={({ isActive }) =>
                   isActive ? classes.active : undefined
                 }
