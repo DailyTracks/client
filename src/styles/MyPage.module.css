@@ -1,0 +1,47 @@
+.leftNav {
+  float: left;
+  width: 170px;
+  height: 500px;
+  padding: 0;
+  margin: 0 0.5rem;
+  background-color: black;
+  border-radius: 1rem;
+  /* text-align: center; */
+}
+.leftNav ul {
+  /* width: 100%; */
+  padding: 0;
+  margin-top: 1rem;
+}
+
+.leftNav li {
+  display: block;
+  /* width: 100%; */
+  font-size: 1.2rem;
+  /* border: 2px solid yellow; */
+  margin: 0.5rem;
+}
+
+.leftNav li i {
+  color: white;
+  width: 20px;
+  margin-right: 1rem;
+}
+
+.leftNav a {
+  border-radius: 1rem;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  display: block;
+  color: white;
+  width: 100%;
+  text-decoration: none;
+}
+.leftNav a:hover {
+  background-color: rgb(170, 166, 166);
+}
+.leftNav a.active {
+  background-color: gray;
+}
+
+

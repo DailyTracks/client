@@ -2,11 +2,12 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../store/auth-slice";
 import classes from "../styles/Header.module.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 function Header() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
     if (window.sessionStorage.getItem("isLogin") === "true") {
@@ -14,6 +15,7 @@ function Header() {
     } else {
       dispatch(authActions.logout());
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const isLogin = useSelector((state) => state.auth.isLogin);
@@ -27,13 +29,39 @@ function Header() {
     }
   }
 
+  const inputHandler = (event) => {
+    setSearchText(event.target.value);
+  };
+
+  const enterHandler = (event) => {
+    if (event.key === "Enter") {
+      console.log(searchText);
+    }
+  };
+
+  const chatHandler = (event) => {
+    navigate("/chat");
+  };
+
+  const chatStyle = {
+    cursor: "pointer",
+  };
+
   return (
     <header className={classes.header}>
       <Link to="/" className={classes.logo}>
         DailyTasks
       </Link>
       <div className={classes.entryarea}>
-        <input className={classes.search} type="text" id="search" required />
+        <input
+          className={classes.search}
+          type="text"
+          id="search"
+          value={searchText}
+          onChange={inputHandler}
+          onKeyDown={enterHandler}
+          required
+        />
         <label className={classes.searchlabel} htmlFor="search">
           장소나 명소를 입력하세요
         </label>
@@ -56,8 +84,15 @@ function Header() {
         {isLogin && (
           <>
             <li>
+              <i
+                class="fa-brands fa-rocketchat fa-2x"
+                onClick={chatHandler}
+                style={chatStyle}
+              ></i>
+            </li>
+            <li>
               <NavLink
-                to="/mypage"
+                to="/user/mypage"
                 className={({ isActive }) =>
                   isActive ? classes.active : undefined
                 }

@@ -1,25 +1,29 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./pages/Home";
 import ErrorPage from "./pages/ErrorPage";
-import BoardsRoot from "./pages/BoardsRoot";
+import BoardsRoot from "./pages/board/BoardsRoot";
 import BoardDetail, {
   loader as boardDetailLoader,
   action as deleteBoardAction,
-} from "./pages/BoardDetail";
-import Boards, { loader as boardsLoader } from "./pages/Boards";
-import NewBoard from "./pages/NewBoard";
-import EditBoard from "./pages/EditBoard";
+} from "./pages/board/BoardDetail";
+import Boards, { loader as boardsLoader } from "./pages/board/Boards";
+import NewBoard from "./pages/board/NewBoard";
+import EditBoard from "./pages/board/EditBoard";
 import { action as boardFormAction } from "./components/BoardForm";
 import Authentication from "./pages/Authentication";
-import CommentRoot from "./pages/CommentRoot";
+import CommentRoot from "./pages/comment/CommentRoot";
 import CommentDetail, {
   action as deleteCommentAction,
-} from "./pages/CommentDetail";
+} from "./pages/comment/CommentDetail";
 import { action as commentFormAction } from "./components/CommentForm";
-import EditComment from "./pages/EditComment";
-import NewComment from "./pages/NewComment";
-import MyPage from "./pages/MyPage";
+import EditComment from "./pages/comment/EditComment";
+import NewComment from "./pages/comment/NewComment";
+import MyPageRoot from "./pages/MyPageRoot";
 import { action as profileAction } from "./components/AuthForm";
+import UserDetailPage from "./pages/UserDetailPage";
+import UserFollowPage from "./pages/UserFollowPage";
+import UserEditPage from "./pages/UserEditPage";
+import ChatRoot from "./pages/ChatRoot";
 
 const router = createBrowserRouter([
   {
@@ -88,8 +92,18 @@ const router = createBrowserRouter([
     action: profileAction,
   },
   {
-    path: "mypage",
-    element: <MyPage />,
+    path: "user/mypage",
+    element: <MyPageRoot />,
+    children: [
+      { index: true, element: <UserDetailPage /> },
+      { path: "follow", element: <UserFollowPage /> },
+      { path: "edit", element: <UserEditPage /> },
+    ],
+  },
+  {
+    path: "chat",
+    element: <ChatRoot />,
+    children: [],
   },
 ]);
 

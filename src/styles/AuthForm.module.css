@@ -46,3 +46,11 @@
 .actions a:hover {
   background-color: var(--color-gray-800);
 }
+
+.actions .login {
+  background-color: aquamarine;
+}
+
+.actions .login:hover {
+  background-color: rgb(10, 250, 170);
+}

@@ -1,0 +1,26 @@
+
+.profile {
+  margin-right: 2rem;
+}
+
+.info {
+  display: flex;
+}
+
+.button_container {
+  text-align: end;
+}
+
+.button_container button {
+  margin: 0 0.5rem;
+  padding: 4px 10px;
+  border-radius: 5px;
+  background-color: aliceblue;
+}
+
+.edit:hover {
+  background-color: aquamarine;
+}
+.delete:hover {
+  background-color: rgb(251, 69, 69);
+}

@@ -7,9 +7,9 @@ import {
   defer,
   useNavigate,
 } from "react-router-dom";
-import classes from "../styles/BoardDetail.module.css";
+import classes from "../../styles/BoardDetail.module.css";
 import { useState, useEffect } from "react";
-import CommentsList from "../components/CommentsList";
+import CommentsList from "../../components/CommentsList";
 
 function BoardDetail() {
   const [loadedBoard, setLoadedBoard] = useState(null);

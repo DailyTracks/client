@@ -6,7 +6,7 @@ import {
   useNavigate,
   useLocation,
 } from "react-router-dom";
-import classes from "../styles/Comment.module.css";
+import classes from "../../styles/Comment.module.css";
 
 function CommentDetail() {
   const navigate = useNavigate();

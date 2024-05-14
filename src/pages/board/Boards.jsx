@@ -1,5 +1,5 @@
 import { json, defer, useRouteLoaderData } from "react-router-dom";
-import BoardsList from "../components/BoardsList";
+import BoardsList from "../../components/BoardsList";
 
 import { useEffect, useState } from "react";
 

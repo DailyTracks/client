@@ -147,7 +147,9 @@ function AuthForm() {
         )}
 
         <div className={classes.actions}>
-          <button style={btnStyle}>로그인</button>
+          <button style={btnStyle} className={classes.login}>
+            로그인
+          </button>
         </div>
       </Form>
     </>
@@ -164,12 +166,6 @@ export async function action({ request, params }) {
   const mode = new URL(request.url).searchParams.get("mode");
 
   if (mode === "signup") {
-    const x = {
-      id: data.get("id"),
-      userId: data.get("userId"),
-      password: data.get("password"),
-    };
-
     const response = await axios.post(
       `http://localhost:8080/api/user/${id}/profile`,
       {

@@ -1,4 +1,4 @@
-import BoardForm from "../components/BoardForm";
+import BoardForm from "../../components/BoardForm";
 
 function NewBoard() {
   return <BoardForm method="post" />;
