@@ -24,6 +24,8 @@ import UserDetailPage from "./pages/UserDetailPage";
 import UserFollowPage from "./pages/UserFollowPage";
 import UserEditPage from "./pages/UserEditPage";
 import ChatRoot from "./pages/ChatRoot";
+import { loader as userLoader } from "./pages/UserDetailPage";
+import { action as userFormAction } from "./components/UserEditForm";
 
 const router = createBrowserRouter([
   {
@@ -94,10 +96,12 @@ const router = createBrowserRouter([
   {
     path: "user/mypage",
     element: <MyPageRoot />,
+    id: "user",
+    loader: userLoader,
     children: [
       { index: true, element: <UserDetailPage /> },
       { path: "follow", element: <UserFollowPage /> },
-      { path: "edit", element: <UserEditPage /> },
+      { path: "edit", element: <UserEditPage />, action: userFormAction },
     ],
   },
   {

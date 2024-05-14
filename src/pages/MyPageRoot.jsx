@@ -3,7 +3,7 @@ import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import classes from "../styles/MyPage.module.css";
 
-function MyPage() {
+function MyPageRoot() {
   const [isLogin, setIsLogin] = useState();
   const navigate = useNavigate();
 
@@ -62,24 +62,10 @@ function MyPage() {
             </ul>
           </div>
           <Outlet />
-          {/* <div className={classes.info}>
-            <div className={classes.profile}>
-              <i className="fa-solid fa-user fa-6x"></i>
-            </div>
-            <div>
-              <p>이름: {userData.username}</p>
-              <p>이메일: {userData.email}</p>
-              <p>추가정보</p>
-            </div>
-          </div>
-          <div className={classes.button_container}>
-            <button className={classes.edit}>내 정보 수정하기</button>
-            <button className={classes.delete}>탈퇴하기</button>
-          </div> */}
         </>
       )}
     </>
   );
 }
 
-export default MyPage;
+export default MyPageRoot;
