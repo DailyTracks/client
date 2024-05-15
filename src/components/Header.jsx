@@ -35,7 +35,7 @@ function Header() {
 
   const enterHandler = (event) => {
     if (event.key === "Enter") {
-      console.log(searchText);
+      navigate(`/search?q=${searchText}`);
     }
   };
 
@@ -63,7 +63,8 @@ function Header() {
           required
         />
         <label className={classes.searchlabel} htmlFor="search">
-          장소나 명소를 입력하세요
+          {/* 장소나 명소를 입력하세요 */}
+          유저를 검색하세요!
         </label>
       </div>
 

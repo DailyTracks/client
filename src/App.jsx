@@ -26,6 +26,8 @@ import UserEditPage from "./pages/UserEditPage";
 import ChatRoot from "./pages/ChatRoot";
 import { loader as userLoader } from "./pages/UserDetailPage";
 import { action as userFormAction } from "./components/UserEditForm";
+import SearchPage from "./pages/SearchPage";
+import { loader as searchLoader } from "./pages/SearchPage";
 
 const router = createBrowserRouter([
   {
@@ -108,6 +110,12 @@ const router = createBrowserRouter([
     path: "chat",
     element: <ChatRoot />,
     children: [],
+  },
+  {
+    path: "search",
+    element: <SearchPage />,
+    id: "users",
+    loader: searchLoader,
   },
 ]);
 
