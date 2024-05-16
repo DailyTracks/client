@@ -203,6 +203,8 @@ export async function action({ request, params }) {
       return null;
     }
 
+    console.log(response);
+    console.log(response.data);
     sessionStorage.setItem("isLogin", "true");
     sessionStorage.setItem("user", JSON.stringify(response.data.user));
 

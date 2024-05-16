@@ -1,11 +1,31 @@
 import axios from "axios";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function UserCard({ user, updated, setUpdated }) {
-  // console.log(path);
+function UserCard({ user, onUpdate }) {
+  const [isFollow, setIsFollow] = useState(false);
   const navigate = useNavigate();
   const my = JSON.parse(sessionStorage.getItem("user"));
   const id = my ? my.id : null;
+
+  useEffect(() => {
+    if (id === null) return;
+
+    axios
+      .get(
+        `http://localhost:8080/api/user/follow?userId=${id}&targetUserId=${user.id}`,
+        { withCredentials: true }
+      )
+      .then((response) => {
+        const follow = response.data.isFollow;
+        if (follow) {
+          setIsFollow(true);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  });
 
   const followHandler = (e) => {
     if (id === null) {
@@ -18,7 +38,7 @@ function UserCard({ user, updated, setUpdated }) {
         { withCredentials: true }
       )
       .then((response) => {
-        console.log(response);
+        onUpdate();
       })
       .catch((error) => {
         console.log(error);
@@ -41,7 +61,10 @@ function UserCard({ user, updated, setUpdated }) {
         `http://localhost:8080/api/user/${id}/follow?targetUserId=${user.id}`
       )
       .then((response) => {
-        setUpdated(!updated);
+        setIsFollow(false);
+        // setUpdated(!updated);
+        // window.location.reload();
+        onUpdate();
       })
       .catch((error) => {
         console.log(error);
@@ -51,8 +74,19 @@ function UserCard({ user, updated, setUpdated }) {
     <>
       <p>id : {user.id}</p>
       <p>name : {user.username}</p>
-      <button onClick={followHandler}>팔로우</button>
-      <button onClick={unfollowHandler}>팔로우 취소</button>
+      {!isFollow && (
+        <button
+          onClick={followHandler}
+          style={{ backgroundColor: "lightblue" }}
+        >
+          팔로우
+        </button>
+      )}
+      {isFollow && (
+        <button onClick={unfollowHandler} style={{ backgroundColor: "red" }}>
+          팔로우 취소
+        </button>
+      )}
     </>
   );
 }
