@@ -10,7 +10,7 @@ function UserFollowPage() {
   useEffect(() => {
     const fetchData = () => {
       axios
-        .get("http://localhost:8080/api/user/32/following")
+        .get("/api/user/32/following")
         .then((response) => {
           if (response.data.length === 0) {
             setUsers(null);

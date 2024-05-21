@@ -80,7 +80,7 @@ function BoardDetail() {
 export default BoardDetail;
 
 async function loadBoard(id) {
-  const response = await fetch("http://localhost:8080/api/board/" + id);
+  const response = await fetch("/api/board/" + id);
 
   if (!response.ok) {
     throw json(
@@ -105,7 +105,7 @@ export function loader({ request, params }) {
 
 export async function action({ params, request }) {
   const boardId = params.boardId;
-  const response = await fetch("http://localhost:8080/api/board/" + boardId, {
+  const response = await fetch("/api/board/" + boardId, {
     method: request.method,
   });
 

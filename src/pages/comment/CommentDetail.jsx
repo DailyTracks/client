@@ -70,12 +70,9 @@ export default CommentDetail;
 export async function action({ params, request }) {
   const commentId = params.commentId;
   const boardId = params.boardId;
-  const response = await fetch(
-    "http://localhost:8080/api/comment/" + commentId,
-    {
-      method: request.method,
-    }
-  );
+  const response = await fetch("/api/comment/" + commentId, {
+    method: request.method,
+  });
 
   if (!response.ok) {
     throw json(

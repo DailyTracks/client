@@ -89,11 +89,11 @@ export async function action({ request, params }) {
 
   // console.log("data : " + JSON.stringify(boardData));
 
-  let url = "http://localhost:8080/api/board";
+  let url = "/api/board";
 
   if (method === "PUT") {
     const boardId = params.boardId;
-    url = "http://localhost:8080/api/board/" + boardId;
+    url = "/api/board/" + boardId;
   }
 
   const response = await fetch(url, {

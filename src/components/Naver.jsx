@@ -2,7 +2,7 @@ import NaverLoginImage from "../asset/btnG_Naver.png";
 
 function Naver() {
   const handlerLogin = (e) => {
-    window.location.href = "http://localhost:8080/api/auth/join/naver";
+    window.location.href = process.env.REACT_APP_PROXY + "/api/auth/join/naver";
   };
 
   const imgStyle = {

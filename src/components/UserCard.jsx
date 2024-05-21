@@ -12,10 +12,9 @@ function UserCard({ user, onUpdate }) {
     if (id === null) return;
 
     axios
-      .get(
-        `http://localhost:8080/api/user/follow?userId=${id}&targetUserId=${user.id}`,
-        { withCredentials: true }
-      )
+      .get(`/api/user/follow?userId=${id}&targetUserId=${user.id}`, {
+        withCredentials: true,
+      })
       .then((response) => {
         const follow = response.data.isFollow;
         if (follow) {
@@ -33,10 +32,9 @@ function UserCard({ user, onUpdate }) {
       return;
     }
     axios
-      .post(
-        `http://localhost:8080/api/user/${id}/follow?targetUserId=${user.id}`,
-        { withCredentials: true }
-      )
+      .post(`/api/user/${id}/follow?targetUserId=${user.id}`, {
+        withCredentials: true,
+      })
       .then((response) => {
         onUpdate();
       })
@@ -57,9 +55,7 @@ function UserCard({ user, onUpdate }) {
     }
 
     axios
-      .delete(
-        `http://localhost:8080/api/user/${id}/follow?targetUserId=${user.id}`
-      )
+      .delete(`/api/user/${id}/follow?targetUserId=${user.id}`)
       .then((response) => {
         setIsFollow(false);
         // setUpdated(!updated);

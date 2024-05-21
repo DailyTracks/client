@@ -77,11 +77,11 @@ export async function action({ request, params }) {
     content: data.get("content"),
   };
 
-  let url = "http://localhost:8080/api/comment";
+  let url = "/api/comment";
 
   if (method === "PUT") {
     const commentId = params.commentId;
-    url = "http://localhost:8080/api/comment/" + commentId;
+    url = "/api/comment/" + commentId;
   }
 
   const response = await fetch(url, {

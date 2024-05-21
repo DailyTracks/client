@@ -22,7 +22,7 @@ function EditUser() {
 
     if (proceed) {
       axios
-        .delete(`http://localhost:8080/api/user/${id}`, {
+        .delete(`/api/user/${id}`, {
           withCredentials: true,
         })
         .then(() => {
@@ -69,7 +69,7 @@ export default EditUser;
 
 async function loadUser() {
   const id = JSON.parse(sessionStorage.getItem("user")).id;
-  let url = `http://localhost:8080/api/user/${id}`;
+  let url = `/api/user/${id}`;
   const response = await axios.get(url, {
     withCredentials: true,
   });

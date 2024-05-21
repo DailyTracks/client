@@ -4,7 +4,7 @@ import Header from "../components/Header";
 import { Container, Row, Col, ListGroup, Form, Button } from "react-bootstrap";
 import axios from "axios";
 
-const socket = io("http://localhost:8080");
+const socket = io(process.env.REACT_APP_PROXY);
 
 function ChatRoot() {
   const [messages, setMessages] = useState([]);
@@ -26,10 +26,10 @@ function ChatRoot() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/api/chat/", {
+        const response = await axios.get("/api/chat/", {
           withCredentials: true,
         });
-        const userResponse = await axios.get("http://localhost:8080/api/auth", {
+        const userResponse = await axios.get("/api/auth", {
           withCredentials: true,
         });
         setMe(userResponse.data.user.id);

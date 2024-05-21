@@ -33,13 +33,14 @@ function Boards() {
 export default Boards;
 
 async function loadBoards(regionTerm) {
-  let url = "http://localhost:8080/api/board";
+  let url = "/api/board";
 
   if (regionTerm) {
     url += "?region=" + regionTerm;
   }
 
   const response = await fetch(url);
+  console.log(response);
 
   if (!response.ok) {
     console.error(`Error: ${response.status} - ${response.statusText}`);

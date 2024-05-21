@@ -30,11 +30,14 @@ function AuthForm() {
       if (searchParams.get("mode") !== "signup") return;
 
       try {
-        const res = await axios.get("http://localhost:8080/api/auth", {
+        const res = await axios.get("/api/auth", {
           withCredentials: true,
         });
         //TODO: 오류 처리해주세요
 
+        console.log(res);
+        console.log(res.data);
+        
         const { id, oauth_provider, username, email } = res.data.user;
         console.log(id, oauth_provider, username, email);
         // setProvider(oauth_provider);
@@ -167,7 +170,7 @@ export async function action({ request, params }) {
 
   if (mode === "signup") {
     const response = await axios.post(
-      `http://localhost:8080/api/user/${id}/profile`,
+      `/api/user/${id}/profile`,
       {
         userId: data.get("userId"),
         password: data.get("password"),
@@ -187,7 +190,7 @@ export async function action({ request, params }) {
   } else if (mode === "login") {
     const dispatch = store.dispatch;
     const response = await axios.post(
-      `http://localhost:8080/api/auth/login`,
+      `/api/auth/login`,
       {
         userId: data.get("email"),
         password: data.get("password"),

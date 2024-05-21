@@ -46,7 +46,7 @@ export async function action({ request, params }) {
   const userData = {
     username: data.get("username"),
   };
-  let url = `http://localhost:8080/api/user/${id}`;
+  let url = `/api/user/${id}`;
 
   const response = await axios.put(url, userData, { withCredentials: true });
 
