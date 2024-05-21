@@ -14,14 +14,22 @@ import CommentsList from "../../components/CommentsList";
 function BoardDetail() {
   const [loadedBoard, setLoadedBoard] = useState(null);
   const [comments, setComments] = useState(null);
+  const [isWriter, setIsWriter] = useState(false);
   const { board } = useRouteLoaderData("board-detail");
+  const myId = window.sessionStorage.getItem("user")
+    ? JSON.parse(sessionStorage.getItem("user")).id
+    : null;
+  // const myId = JSON.parse(sessionStorage.getItem("user")).id;
   const navigate = useNavigate();
 
   useEffect(() => {
     board
       .then((result) => {
-        setLoadedBoard(result);
+        setLoadedBoard(result.board);
         setComments(result.comments);
+        if (result.board.author_id === myId) {
+          setIsWriter(true);
+        }
       })
       .catch((error) => {
         console.error("Error occurred:", error);
@@ -48,12 +56,16 @@ function BoardDetail() {
               <p className={classes.region}>{loadedBoard.region}</p>
               <p className={classes.content}>{loadedBoard.content}</p>
             </div>
-            <button className={classes.delete} onClick={deleteHandler}>
-              Delete
-            </button>
-            <Link to="edit" className={classes.edit}>
-              Edit
-            </Link>
+            {isWriter && (
+              <button className={classes.delete} onClick={deleteHandler}>
+                Delete
+              </button>
+            )}
+            {isWriter && (
+              <Link to="edit" className={classes.edit}>
+                Edit
+              </Link>
+            )}
             <button
               onClick={() => {
                 navigate(-1);

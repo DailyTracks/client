@@ -37,19 +37,22 @@ function AuthForm() {
 
         console.log(res);
         console.log(res.data);
-        
-        const { id, oauth_provider, username, email } = res.data.user;
-        console.log(id, oauth_provider, username, email);
-        // setProvider(oauth_provider);
-        // setName(username);
-        // setEmail(email);
-        // setId(id);
+        console.log(searchParams);
+
+        // const { id, oauth_provider, username, email } = res.data.user;
+        // setUserData({
+        //   provider: oauth_provider,
+        //   name: username,
+        //   email: email,
+        //   id: id,
+        // });
         setUserData({
-          provider: oauth_provider,
-          name: username,
-          email: email,
-          id: id,
+          provider: searchParams.get("provider"),
+          name: searchParams.get("username"),
+          email: searchParams.get("email"),
+          id: searchParams.get("id"),
         });
+        console.log(userData);
       } catch (error) {
         console.error(error);
       }

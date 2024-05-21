@@ -35,7 +35,67 @@
   color: white;
 }
 
-.actions button[type='button']:hover {
+.actions button[type="button"]:hover {
   background-color: blue;
   color: white;
+}
+
+.imageLabel {
+  display: inline-block;
+}
+
+.iFrame {
+  display: inline-block;
+  padding: 10px;
+  border: 3px solid black;
+  border-radius: 10px;
+  &:hover {
+    background: rgb(77, 77, 77);
+    color: #fff;
+  }
+}
+
+.images {
+  display: none !important;
+  padding: 0;
+}
+
+.preview_list {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+}
+
+.preview {
+  position: relative;
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  cursor: pointer;
+  padding: 0;
+}
+
+
+.removeIcon {
+  position: absolute;
+  top: 1;
+  left: 1;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  opacity: 1;
+  padding: 10px;
+  border-radius: 10px;
+  &:hover {
+    background: rgb(77, 77, 77);
+    color: #fff;
+  }
+}
+
+.preview:hover {
+  filter: brightness(0.5);
+}
+
+.preview:hover .removeIcon{
+  font-size: 50px;
 }

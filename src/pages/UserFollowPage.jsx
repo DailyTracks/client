@@ -6,11 +6,12 @@ import classes from "../styles/UserFollowPage.module.css";
 function UserFollowPage() {
   const [users, setUsers] = useState(null);
   const [refresh, setRefresh] = useState(false);
+  const id = JSON.parse(sessionStorage.getItem("user")).id;
 
   useEffect(() => {
     const fetchData = () => {
       axios
-        .get("/api/user/32/following")
+        .get(`/api/user/${id}/following`)
         .then((response) => {
           if (response.data.length === 0) {
             setUsers(null);
