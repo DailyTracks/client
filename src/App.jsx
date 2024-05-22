@@ -21,13 +21,14 @@ import NewComment from "./pages/comment/NewComment";
 import MyPageRoot from "./pages/MyPageRoot";
 import { action as profileAction } from "./components/AuthForm";
 import UserDetailPage from "./pages/UserDetailPage";
-import UserFollowPage from "./pages/UserFollowPage";
+import UserFollowingPage from "./pages/UserFollowingPage";
 import UserEditPage from "./pages/UserEditPage";
 import ChatRoot from "./pages/ChatRoot";
 import { loader as userLoader } from "./pages/UserDetailPage";
 import { action as userFormAction } from "./components/UserEditForm";
 import SearchPage from "./pages/SearchPage";
 import { loader as searchLoader } from "./pages/SearchPage";
+import UserFollowerPage from "./pages/UserFollowerPage";
 
 const router = createBrowserRouter([
   {
@@ -102,7 +103,8 @@ const router = createBrowserRouter([
     loader: userLoader,
     children: [
       { index: true, element: <UserDetailPage /> },
-      { path: "follow", element: <UserFollowPage /> },
+      { path: "following", element: <UserFollowingPage /> },
+      { path: "follower", element: <UserFollowerPage /> },
       { path: "edit", element: <UserEditPage />, action: userFormAction },
     ],
   },

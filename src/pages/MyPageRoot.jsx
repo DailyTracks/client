@@ -37,7 +37,7 @@ function MyPageRoot() {
               </li>
               <li>
                 <NavLink
-                  to={"follow"}
+                  to={"following"}
                   className={({ isActive }) =>
                     isActive ? classes.active : undefined
                   }
@@ -45,6 +45,18 @@ function MyPageRoot() {
                 >
                   <i className="fa-solid fa-user-group"></i>
                   팔로우
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to={"follower"}
+                  className={({ isActive }) =>
+                    isActive ? classes.active : undefined
+                  }
+                  end
+                >
+                  <i className="fa-solid fa-user-group"></i>
+                  팔로워
                 </NavLink>
               </li>
               <li>

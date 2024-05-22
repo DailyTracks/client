@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import UserCard from "../components/UserCard";
 import classes from "../styles/UserFollowPage.module.css";
 
-function UserFollowPage() {
+function UserFollowingPage() {
   const [users, setUsers] = useState(null);
   const [refresh, setRefresh] = useState(false);
   const id = JSON.parse(sessionStorage.getItem("user")).id;
@@ -50,4 +50,4 @@ function UserFollowPage() {
   );
 }
 
-export default UserFollowPage;
+export default UserFollowingPage;

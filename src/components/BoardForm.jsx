@@ -7,7 +7,7 @@ function BoardForm({ method, board }) {
   const navigation = useNavigation();
   const [images, setImages] = useState([]);
   const [previews, setPreviews] = useState([]);
-  const [fileInputKey, setFileInputKey] = useState(0); // To reset file input
+  // const [fileInputKey, setFileInputKey] = useState(0);
 
   const isSubmitting = navigation.state === "submitting";
 
@@ -26,7 +26,7 @@ function BoardForm({ method, board }) {
     const imagePreviews = files.map((file) => URL.createObjectURL(file));
     setPreviews((prevPreviews) => [...prevPreviews, ...imagePreviews]);
     setImages((prevImages) => [...prevImages, ...files]);
-    setFileInputKey((prevKey) => prevKey + 1);
+    // setFileInputKey((prevKey) => prevKey + 1);
   };
 
   const removeImageHandler = (index) => {
@@ -42,6 +42,8 @@ function BoardForm({ method, board }) {
     formData.append("region", event.target.region.value);
     formData.append("content", event.target.content.value);
 
+    console.log(images);
+
     images.forEach((image) => {
       formData.append("images", image);
       console.log(image);
@@ -52,6 +54,9 @@ function BoardForm({ method, board }) {
         method: method,
         body: formData,
       });
+
+      console.log(response);
+      console.log(formData);
 
       if (!response.ok) {
         throw new Error("Could not save board.");
@@ -145,7 +150,6 @@ function BoardForm({ method, board }) {
         <button disabled={isSubmitting}>
           {isSubmitting ? "Submitting..." : "Save"}
         </button>
-        <button onClick={submitHandler}>ssss</button>
       </div>
     </Form>
   );
