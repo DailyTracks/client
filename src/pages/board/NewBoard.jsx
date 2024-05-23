@@ -1,4 +1,4 @@
-import BoardForm from "../../components/BoardForm";
+import BoardForm from "../../components/board/BoardForm";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 

@@ -9,12 +9,16 @@ import {
 } from "react-router-dom";
 import classes from "../../styles/BoardDetail.module.css";
 import { useState, useEffect } from "react";
-import CommentsList from "../../components/CommentsList";
+import CommentsList from "../../components/comment/CommentsList";
+import axios from "axios";
 
 function BoardDetail() {
   const [loadedBoard, setLoadedBoard] = useState(null);
   const [comments, setComments] = useState(null);
   const [isWriter, setIsWriter] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
+  const [images, setImages] = useState(null);
+  const submit = useSubmit();
   const { board } = useRouteLoaderData("board-detail");
   const myId = window.sessionStorage.getItem("user")
     ? JSON.parse(sessionStorage.getItem("user")).id
@@ -23,9 +27,17 @@ function BoardDetail() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (window.sessionStorage.getItem("isLogin") === "true") {
+      setIsLogin(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
     board
       .then((result) => {
-        setLoadedBoard(result.board);
+        setImages(result.content.images);
+        setLoadedBoard(result);
         setComments(result.comments);
         if (result.board.author_id === myId) {
           setIsWriter(true);
@@ -34,9 +46,26 @@ function BoardDetail() {
       .catch((error) => {
         console.error("Error occurred:", error);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [board]);
 
-  const submit = useSubmit();
+  const likeHandler = () => {
+    if (!isLogin) {
+      navigate("/auth?mode=login");
+    }
+
+    console.log(loadedBoard);
+
+    axios
+      .post(`/api/board/${loadedBoard.id}/like`)
+      .then((response) => {
+        console.log(response);
+        navigate(".", { replace: true });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   function deleteHandler() {
     const proceed = window.confirm("삭제하시겠습니까?");
@@ -54,7 +83,16 @@ function BoardDetail() {
             <div>
               <p className={classes.title}>{loadedBoard.title}</p>
               <p className={classes.region}>{loadedBoard.region}</p>
-              <p className={classes.content}>{loadedBoard.content}</p>
+              {images &&
+                images.map((image, index) => (
+                  <img
+                    key={index}
+                    src={process.env.REACT_APP_PROXY + image}
+                    alt={`Image ${index}`}
+                    className={classes.image}
+                  />
+                ))}
+              <p className={classes.content}>{loadedBoard.content.content}</p>
             </div>
             {isWriter && (
               <button className={classes.delete} onClick={deleteHandler}>
@@ -67,6 +105,9 @@ function BoardDetail() {
               </Link>
             )}
             <button
+              onClick={likeHandler}
+            >{`좋아요 ${loadedBoard.like_count}`}</button>
+            <button
               onClick={() => {
                 navigate(-1);
               }}
@@ -74,6 +115,9 @@ function BoardDetail() {
             >
               Back
             </button>
+            <p className={classes.hit_count}>
+              {`조회수 : ${loadedBoard.hit_count}`}
+            </p>
           </div>
         ) : (
           <p style={{ textAlign: "center" }}>Loading...</p>

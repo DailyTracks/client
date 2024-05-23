@@ -1,17 +1,16 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import UserCard from "../components/UserCard";
-import classes from "../styles/UserFollowPage.module.css";
+import UserCard from "../../components/user/UserCard";
+import classes from "../../styles/UserFollowPage.module.css";
 
-function UserFollowerPage() {
+function UserFollowingPage() {
   const [users, setUsers] = useState(null);
-  const [refresh, setRefresh] = useState(false);
   const id = JSON.parse(sessionStorage.getItem("user")).id;
 
   useEffect(() => {
     const fetchData = () => {
       axios
-        .get(`/api/user/${id}/follower`)
+        .get(`/api/user/${id}/following`)
         .then((response) => {
           console.log(response);
           if (response.data.length === 0) {
@@ -25,11 +24,8 @@ function UserFollowerPage() {
         });
     };
     fetchData();
-  }, [refresh]);
-
-  const followUpdateHandler = () => {
-    setRefresh(!refresh);
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
@@ -37,18 +33,18 @@ function UserFollowerPage() {
         <ul className={classes.list}>
           {users.map((user) => (
             <li key={user.id} className={classes.card}>
-              <UserCard user={user.followee} onUpdate={followUpdateHandler} />
+              <UserCard user={user.followee} />
             </li>
           ))}
         </ul>
       )}
       {!users && (
         <>
-          <p>나를 팔로우한 유저가 아직 없어요!</p>
+          <p>유저를 팔로우하세요!</p>
         </>
       )}
     </>
   );
 }
 
-export default UserFollowerPage;
+export default UserFollowingPage;

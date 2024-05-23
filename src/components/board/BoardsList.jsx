@@ -1,5 +1,5 @@
-import classes from "../styles/BoardList.module.css";
-import Board from "../components/Board";
+import classes from "../../styles/BoardList.module.css";
+import Board from "./Board";
 import { useSearchParams } from "react-router-dom";
 
 function BoardsList({ boards }) {

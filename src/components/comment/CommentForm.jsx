@@ -6,7 +6,7 @@ import {
   json,
   redirect,
 } from "react-router-dom";
-import classes from "../styles/BoardForm.module.css";
+import classes from "../../styles/BoardForm.module.css";
 
 function CommentForm({ method }) {
   const navigate = useNavigate();

@@ -4,7 +4,7 @@ import {
   useNavigate,
   useRouteLoaderData,
 } from "react-router-dom";
-import classes from "../styles/UserDetail.module.css";
+import classes from "../../styles/UserDetail.module.css";
 import axios from "axios";
 import { Suspense } from "react";
 

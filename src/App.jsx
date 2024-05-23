@@ -9,26 +9,26 @@ import BoardDetail, {
 import Boards, { loader as boardsLoader } from "./pages/board/Boards";
 import NewBoard from "./pages/board/NewBoard";
 import EditBoard from "./pages/board/EditBoard";
-import { action as boardFormAction } from "./components/BoardForm";
+import { action as boardFormAction } from "./components/board/BoardForm";
 import Authentication from "./pages/Authentication";
 import CommentRoot from "./pages/comment/CommentRoot";
 import CommentDetail, {
   action as deleteCommentAction,
 } from "./pages/comment/CommentDetail";
-import { action as commentFormAction } from "./components/CommentForm";
+import { action as commentFormAction } from "./components/comment/CommentForm";
 import EditComment from "./pages/comment/EditComment";
 import NewComment from "./pages/comment/NewComment";
-import MyPageRoot from "./pages/MyPageRoot";
+import MyPageRoot from "./pages/mypage/MyPageRoot";
 import { action as profileAction } from "./components/AuthForm";
-import UserDetailPage from "./pages/UserDetailPage";
-import UserFollowingPage from "./pages/UserFollowingPage";
-import UserEditPage from "./pages/UserEditPage";
+import UserDetailPage from "./pages/mypage/UserDetailPage";
+import UserFollowingPage from "./pages/mypage/UserFollowingPage";
+import UserEditPage from "./pages/mypage/UserEditPage";
 import ChatRoot from "./pages/ChatRoot";
-import { loader as userLoader } from "./pages/UserDetailPage";
-import { action as userFormAction } from "./components/UserEditForm";
+import { loader as userLoader } from "./pages/mypage/UserDetailPage";
+import { action as userFormAction } from "./components/user/UserEditForm";
 import SearchPage from "./pages/SearchPage";
 import { loader as searchLoader } from "./pages/SearchPage";
-import UserFollowerPage from "./pages/UserFollowerPage";
+import UserFollowerPage from "./pages/mypage/UserFollowerPage";
 
 const router = createBrowserRouter([
   {

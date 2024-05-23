@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
-import Header from "../components/Header";
-import classes from "../styles/MyPage.module.css";
+import Header from "../../components/Header";
+import classes from "../../styles/MyPage.module.css";
 
 function MyPageRoot() {
   const [isLogin, setIsLogin] = useState();

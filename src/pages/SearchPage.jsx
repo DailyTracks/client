@@ -2,7 +2,7 @@ import Header from "../components/Header";
 import axios from "axios";
 import { Suspense } from "react";
 import { Await, defer, useRouteLoaderData } from "react-router-dom";
-import UsersList from "../components/UsersList";
+import UsersList from "../components/user/UsersList";
 
 function SearchPage() {
   const { users } = useRouteLoaderData("users");

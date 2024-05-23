@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { Await, useRouteLoaderData } from "react-router-dom";
-import UserEditForm from "../components/UserEditForm";
+import UserEditForm from "../../components/user/UserEditForm";
 
 function UserEditPage() {
   const { user } = useRouteLoaderData("user");

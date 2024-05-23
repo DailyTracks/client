@@ -1,6 +1,7 @@
 import { Form, useNavigate, useNavigation, redirect } from "react-router-dom";
 import { useState } from "react";
-import classes from "../styles/BoardForm.module.css";
+import classes from "../../styles/BoardForm.module.css";
+import axios from "axios";
 
 function BoardForm({ method, board }) {
   const navigate = useNavigate();
@@ -42,23 +43,27 @@ function BoardForm({ method, board }) {
     formData.append("region", event.target.region.value);
     formData.append("content", event.target.content.value);
 
-    console.log(images);
-
-    images.forEach((image) => {
+    images.forEach((image, index) => {
       formData.append("images", image);
-      console.log(image);
     });
 
     try {
-      const response = await fetch("/api/board", {
-        method: method,
-        body: formData,
-      });
+      const response = await axios.post(
+        "/api/board",
+        formData,
+        {
+          headers: {
+            // "Content-Type": "application/json",
+            "Content-Type": "multipart/form-data",
+          },
+        },
+        { withCredentials: true }
+      );
 
-      console.log(response);
-      console.log(formData);
+      // console.log(response);
+      // console.log(...formData);
 
-      if (!response.ok) {
+      if (response.status !== 201) {
         throw new Error("Could not save board.");
       }
 
@@ -160,24 +165,12 @@ export default BoardForm;
 export async function action({ request, params }) {
   const method = request.method;
   const data = await request.formData();
-  console.log(data);
-
-  const images = data.getAll("images");
-  images.forEach((file) => {
-    console.log(file);
-  });
-
-  console.log(images);
 
   const boardData = {
     title: data.get("title"),
     content: data.get("content"),
     region: data.get("region"),
   };
-
-  console.log(boardData);
-
-  // console.log("data : " + JSON.stringify(boardData));
 
   let url = "/api/board";
 

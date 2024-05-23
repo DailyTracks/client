@@ -1,5 +1,5 @@
 import { useRouteLoaderData } from "react-router-dom";
-import BoardForm from "../../components/BoardForm";
+import BoardForm from "../../components/board/BoardForm";
 import { useEffect, useState } from "react";
 
 function EditBoard() {

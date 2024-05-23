@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function UserCard({ user, onUpdate }) {
+function UserCard({ user }) {
   const [isFollow, setIsFollow] = useState(false);
   const navigate = useNavigate();
   const my = JSON.parse(sessionStorage.getItem("user"));
@@ -36,7 +36,7 @@ function UserCard({ user, onUpdate }) {
         withCredentials: true,
       })
       .then((response) => {
-        onUpdate();
+        navigate(".", { replace: true });
       })
       .catch((error) => {
         console.log(error);
@@ -60,7 +60,7 @@ function UserCard({ user, onUpdate }) {
         setIsFollow(false);
         // setUpdated(!updated);
         // window.location.reload();
-        onUpdate();
+        navigate(".", { replace: true });
       })
       .catch((error) => {
         console.log(error);

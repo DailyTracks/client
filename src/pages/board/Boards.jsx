@@ -1,7 +1,7 @@
 import { json, defer, useRouteLoaderData } from "react-router-dom";
-import BoardsList from "../../components/BoardsList";
-
+import BoardsList from "../../components/board/BoardsList";
 import { useEffect, useState } from "react";
+// import axios from "axios";
 
 function Boards() {
   const [loadedBoards, setLoadedBoards] = useState(null);
@@ -10,12 +10,20 @@ function Boards() {
   useEffect(() => {
     events
       .then((result) => {
+        console.log(result);
         setLoadedBoards(result);
       })
       .catch((error) => {
         console.error("Error occurred:", error);
       });
   }, [events]);
+
+  // useEffect(() => {
+  //   axios
+  //     .get("/api/board/geo-status")
+  //     .then((response) => console.log(response))
+  //     .catch((error) => console.log(error));
+  // }, []);
 
   return (
     <>
@@ -32,15 +40,19 @@ function Boards() {
 
 export default Boards;
 
-async function loadBoards(regionTerm) {
+async function loadBoards(region, type) {
   let url = "/api/board";
 
-  if (regionTerm) {
-    url += "?region=" + regionTerm;
+  if (region) {
+    url += "?region=" + region;
+  }
+
+  if (type) {
+    url += "&type=" + type;
   }
 
   const response = await fetch(url);
-  console.log(response);
+  // console.log(response);
 
   if (!response.ok) {
     console.error(`Error: ${response.status} - ${response.statusText}`);
@@ -52,14 +64,15 @@ async function loadBoards(regionTerm) {
     );
   } else {
     const resData = await response.json();
-    // return await resData;
+    console.log(response);
     return resData;
   }
 }
 
 export function loader({ request }) {
   const region = new URL(request.url).searchParams.get("region");
+  const type = new URL(request.url).searchParams.get("type");
   return defer({
-    events: loadBoards(region),
+    events: loadBoards(region, type),
   });
 }

@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { useRouteLoaderData } from "react-router-dom";
 import { useState, useEffect } from "react";
-import CommentNavigation from "../../components/CommentNavigation";
+import CommentNavigation from "../../components/comment/CommentNavigation";
 import classes from "../../styles/Board.module.css";
 
 function CommentRoot() {
