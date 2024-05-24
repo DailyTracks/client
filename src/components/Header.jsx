@@ -3,11 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../store/auth-slice";
 import classes from "../styles/Header.module.css";
 import { useEffect, useState } from "react";
+import { Modal } from "antd";
 
 function Header() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [searchText, setSearchText] = useState("");
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   useEffect(() => {
     if (window.sessionStorage.getItem("isLogin") === "true") {
@@ -21,13 +23,27 @@ function Header() {
   const isLogin = useSelector((state) => state.auth.isLogin);
 
   function logoutHandler() {
-    if (window.confirm("로그아웃 하시겠습니까?")) {
-      sessionStorage.removeItem("user");
-      sessionStorage.setItem("isLogin", "false");
-      dispatch(authActions.logout());
-      navigate("/");
-    }
+    setIsModalVisible(true);
+
+    // if (window.confirm("로그아웃 하시겠습니까?")) {
+    //   sessionStorage.removeItem("user");
+    //   sessionStorage.setItem("isLogin", "false");
+    //   dispatch(authActions.logout());
+    //   navigate("/");
+    // }
   }
+
+  const handleOk = () => {
+    sessionStorage.removeItem("user");
+    sessionStorage.setItem("isLogin", "false");
+    dispatch(authActions.logout());
+    setIsModalVisible(false);
+    navigate("/");
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
 
   const inputHandler = (event) => {
     setSearchText(event.target.value);
@@ -106,6 +122,14 @@ function Header() {
               <button onClick={logoutHandler} className={classes.logout}>
                 로그아웃
               </button>
+              <Modal
+                title="로그아웃"
+                open={isModalVisible}
+                onOk={handleOk}
+                onCancel={handleCancel}
+              >
+                <p>로그아웃 하시겠습니까?</p>
+              </Modal>
             </li>
           </>
         )}

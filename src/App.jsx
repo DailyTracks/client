@@ -9,7 +9,6 @@ import BoardDetail, {
 import Boards, { loader as boardsLoader } from "./pages/board/Boards";
 import NewBoard from "./pages/board/NewBoard";
 import EditBoard from "./pages/board/EditBoard";
-import { action as boardFormAction } from "./components/board/BoardForm";
 import Authentication from "./pages/Authentication";
 import CommentRoot from "./pages/comment/CommentRoot";
 import CommentDetail, {
@@ -73,7 +72,7 @@ const router = createBrowserRouter([
               {
                 path: "edit",
                 element: <EditBoard />,
-                action: boardFormAction,
+                // action: boardFormAction,
               },
               {
                 path: "new",
@@ -85,7 +84,7 @@ const router = createBrowserRouter([
           {
             path: "new",
             element: <NewBoard />,
-            action: boardFormAction,
+            // action: boardFormAction,
           },
         ],
       },

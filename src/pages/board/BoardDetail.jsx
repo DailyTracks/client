@@ -6,6 +6,7 @@ import {
   redirect,
   defer,
   useNavigate,
+  useLocation,
 } from "react-router-dom";
 import classes from "../../styles/BoardDetail.module.css";
 import { useState, useEffect } from "react";
@@ -19,6 +20,9 @@ function BoardDetail() {
   const [isLogin, setIsLogin] = useState(false);
   const [images, setImages] = useState(null);
   const submit = useSubmit();
+  const location = useLocation();
+  console.log(location);
+  const currentSearch = location.search;
   const { board } = useRouteLoaderData("board-detail");
   const myId = window.sessionStorage.getItem("user")
     ? JSON.parse(sessionStorage.getItem("user")).id
@@ -36,18 +40,18 @@ function BoardDetail() {
   useEffect(() => {
     board
       .then((result) => {
+        console.log(result);
         setImages(result.content.images);
         setLoadedBoard(result);
         setComments(result.comments);
-        if (result.board.author_id === myId) {
+        if (result.author_id === myId) {
           setIsWriter(true);
         }
       })
       .catch((error) => {
         console.error("Error occurred:", error);
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [board]);
+  }, [board, location.key]);
 
   const likeHandler = () => {
     if (!isLogin) {
@@ -72,6 +76,7 @@ function BoardDetail() {
     if (proceed) {
       // {data, method }
       submit(null, { method: "delete" });
+      navigate(`/board${currentSearch}`, { replace: true });
     }
   }
 
@@ -81,14 +86,15 @@ function BoardDetail() {
         {loadedBoard ? (
           <div>
             <div>
-              <p className={classes.title}>{loadedBoard.title}</p>
-              <p className={classes.region}>{loadedBoard.region}</p>
+              <p className={classes.title}>제목: {loadedBoard.title}</p>
+              <p className={classes.title}>작성자: {loadedBoard.author}</p>
+              <p className={classes.region}>지역: {loadedBoard.region}</p>
               {images &&
                 images.map((image, index) => (
                   <img
                     key={index}
                     src={process.env.REACT_APP_PROXY + image}
-                    alt={`Image ${index}`}
+                    alt={`${index}`}
                     className={classes.image}
                   />
                 ))}
@@ -100,7 +106,7 @@ function BoardDetail() {
               </button>
             )}
             {isWriter && (
-              <Link to="edit" className={classes.edit}>
+              <Link to={`edit${currentSearch}`} className={classes.edit}>
                 Edit
               </Link>
             )}
@@ -109,7 +115,7 @@ function BoardDetail() {
             >{`좋아요 ${loadedBoard.like_count}`}</button>
             <button
               onClick={() => {
-                navigate(-1);
+                navigate(`/board${currentSearch}`, { replace: true });
               }}
               className={classes.back}
             >

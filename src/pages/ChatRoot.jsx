@@ -6,6 +6,7 @@ import axios from "axios";
 
 const socket = io(process.env.REACT_APP_PROXY);
 
+// 채팅방 상대방 단방향 매칭
 function ChatRoot() {
   const [messages, setMessages] = useState([]);
   const [chatData, setChatData] = useState([]);

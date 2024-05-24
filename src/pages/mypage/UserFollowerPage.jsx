@@ -8,22 +8,20 @@ function UserFollowerPage() {
   const id = JSON.parse(sessionStorage.getItem("user")).id;
 
   useEffect(() => {
-    const fetchData = () => {
-      axios
-        .get(`/api/user/${id}/follower`)
-        .then((response) => {
-          console.log(response);
-          if (response.data.length === 0) {
-            setUsers(null);
-            return;
-          }
-          setUsers(response.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    };
-    fetchData();
+    axios
+      .get(`/api/user/${id}/follower`)
+      .then((response) => {
+        console.log(response);
+        if (response.data.length === 0) {
+          setUsers(null);
+          return;
+        }
+        setUsers(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -33,7 +31,7 @@ function UserFollowerPage() {
         <ul className={classes.list}>
           {users.map((user) => (
             <li key={user.id} className={classes.card}>
-              <UserCard user={user.followee} />
+              <UserCard user={user} />
             </li>
           ))}
         </ul>

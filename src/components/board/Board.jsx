@@ -1,12 +1,18 @@
 import HashTag from "../HashTag";
 import classes from "../../styles/Board.module.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 function Board({ board }) {
+  const location = useLocation();
+  const currentRegion = location.search;
+  const truncateContent = (content, length) => {
+    return content.length > length
+      ? content.substring(0, length) + "...더보기"
+      : content;
+  };
   return (
     <div className={classes.board}>
-      {/* <img className={classes.image} src="" alt="memo_img" /> */}
-      <Link to={`/board/${board.id}`} className={classes.title}>
+      <Link to={`/board/${board.id}${currentRegion}`} className={classes.title}>
         {board.title}
       </Link>
       {board.content.images.map((image, index) => (
@@ -17,8 +23,9 @@ function Board({ board }) {
           alt={`Image ${index}`}
         />
       ))}
-      <p className={classes.content}>{board.content.content}</p>
-      {/* {board.content.images} */}
+      <p className={classes.content}>
+        {truncateContent(board.content.content, 5)}
+      </p>
       <HashTag />
     </div>
   );

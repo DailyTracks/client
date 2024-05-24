@@ -22,12 +22,11 @@ function CommentRoot() {
     <>
       <CommentNavigation />
       <div>
-        <p>여행일지</p>
         {loadedBoard && (
           <div style={{ border: "1px solid red" }}>
             <p className={classes.title}>{loadedBoard.title}</p>
             <p className={classes.region}>{loadedBoard.region}</p>
-            <p className={classes.content}>{loadedBoard.content}</p>
+            <p className={classes.content}>{loadedBoard.content.content}</p>
           </div>
         )}
       </div>

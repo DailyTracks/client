@@ -1,7 +1,6 @@
 import {
   useSubmit,
   Link,
-  json,
   redirect,
   useNavigate,
   useLocation,
@@ -12,17 +11,18 @@ function CommentDetail() {
   const navigate = useNavigate();
   const location = useLocation();
   const submit = useSubmit();
-  const comment = location.state.comment;
+  const comment = location.state?.comment;
 
   function deleteHandler() {
     const proceed = window.confirm("삭제하시겠습니까?");
     if (proceed) {
       // {data, method }
       submit(null, { method: "delete" });
+      navigate(-1);
     }
   }
 
-  console.log(comment);
+  // console.log(comment);
 
   return (
     <>
@@ -31,9 +31,7 @@ function CommentDetail() {
         {comment ? (
           <div>
             <div>
-              <p className={classes.username}>
-                Username : {comment.user.username}
-              </p>
+              <p className={classes.username}>Username : {comment.author}</p>
               <p className={classes.content}>Comment : {comment.content}</p>
               <p className={classes.time}>createdAt : {comment.createdAt}</p>
             </div>
@@ -50,7 +48,7 @@ function CommentDetail() {
 
             <button
               onClick={() => {
-                navigate(-1);
+                navigate(-1, { replace: true });
               }}
               className={classes.back}
             >
@@ -74,13 +72,15 @@ export async function action({ params, request }) {
     method: request.method,
   });
 
-  if (!response.ok) {
-    throw json(
-      { message: "Could not delete comment." },
-      {
-        status: 500,
-      }
-    );
-  }
+  console.log(response);
+
+  // if (response.status !== 200) {
+  //   throw json(
+  //     { message: "Could not delete comment." },
+  //     {
+  //       status: 500,
+  //     }
+  //   );
+  // }
   return redirect(`/board/${boardId}`);
 }

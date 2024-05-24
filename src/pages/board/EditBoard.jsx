@@ -6,9 +6,6 @@ function EditBoard() {
   const [loadedBoard, setLoadedBoard] = useState(null);
   const { board } = useRouteLoaderData("board-detail");
 
-  console.log(board);
-  console.log(board);
-
   useEffect(() => {
     board
       .then((result) => {
@@ -19,7 +16,7 @@ function EditBoard() {
         console.error("Error occurred:", error);
       });
   }, [board]);
-  return <BoardForm method="put" board={loadedBoard} />;
+  return <>{loadedBoard && <BoardForm method="put" board={loadedBoard} />}</>;
 }
 
 export default EditBoard;
