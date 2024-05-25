@@ -12,6 +12,7 @@ import classes from "../../styles/BoardDetail.module.css";
 import { useState, useEffect } from "react";
 import CommentsList from "../../components/comment/CommentsList";
 import axios from "axios";
+import SwiperImage from "../../components/SwiperImage";
 
 function BoardDetail() {
   const [loadedBoard, setLoadedBoard] = useState(null);
@@ -86,10 +87,27 @@ function BoardDetail() {
         {loadedBoard ? (
           <div>
             <div>
-              <p className={classes.title}>제목: {loadedBoard.title}</p>
-              <p className={classes.title}>작성자: {loadedBoard.author}</p>
-              <p className={classes.region}>지역: {loadedBoard.region}</p>
-              {images &&
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  padding: "0 1rem",
+                  paddingBottom: "5px",
+                  borderBottom: "2px solid black",
+                }}
+              >
+                <div>
+                  <p className={classes.title}>제목: {loadedBoard.title}</p>
+                  <p className={classes.author}>작성자: {loadedBoard.author}</p>
+                </div>
+                <img
+                  src="https://source.boringavatars.com/beam"
+                  alt="profile"
+                  className={classes.profile_image}
+                />
+              </div>
+              {/* <p className={classes.region}>지역: {loadedBoard.region}</p> */}
+              {/* {images &&
                 images.map((image, index) => (
                   <img
                     key={index}
@@ -97,22 +115,30 @@ function BoardDetail() {
                     alt={`${index}`}
                     className={classes.image}
                   />
-                ))}
+                ))} */}
+              {images && <SwiperImage data={images} />}
               <p className={classes.content}>{loadedBoard.content.content}</p>
             </div>
+            <button
+              onClick={likeHandler}
+              className={classes.like}
+            >{`좋아요 ${loadedBoard.like_count}`}</button>
             {isWriter && (
               <button className={classes.delete} onClick={deleteHandler}>
                 Delete
               </button>
             )}
             {isWriter && (
-              <Link to={`edit${currentSearch}`} className={classes.edit}>
+              <button
+                onClick={() => {
+                  navigate(`edit${currentSearch}`);
+                }}
+                className={classes.edit}
+              >
                 Edit
-              </Link>
+              </button>
             )}
-            <button
-              onClick={likeHandler}
-            >{`좋아요 ${loadedBoard.like_count}`}</button>
+
             <button
               onClick={() => {
                 navigate(`/board${currentSearch}`, { replace: true });
