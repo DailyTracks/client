@@ -41,7 +41,11 @@ function EditUser() {
             <>
               <div className={classes.info}>
                 <div className={classes.profile}>
-                  <i className="fa-solid fa-user fa-6x"></i>
+                  <img
+                    src="https://source.boringavatars.com/beam"
+                    alt="profile"
+                    className={classes.profile_image}
+                  />
                 </div>
                 <div>
                   <p>이름: {userData.username}</p>

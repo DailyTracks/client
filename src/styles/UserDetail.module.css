@@ -1,6 +1,17 @@
-
 .profile {
-  margin-right: 2rem;
+  margin: 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile_image {
+  border-radius: 50%;
+  border: 5px solid gray;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin-right: 20px;
 }
 
 .info {

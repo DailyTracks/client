@@ -1,0 +1,61 @@
+.profile_container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  width: 400px;
+  margin: 1rem; 
+  border: 1px solid black;
+  border-radius: 10px;
+  /* background: linear-gradient(to right, #333, #9c9c9c); */
+  background-color: black;
+}
+
+.profile_image {
+  border-radius: 50%;
+  border: 5px solid gray;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin-right: 20px;
+}
+
+.profile_details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile_details p {
+  margin: 0;
+  padding: 5px 0;
+  font-size: 1.2rem;
+  color: white;
+}
+
+.follow_btn {
+  background-color: #4396F6;
+  margin-right: 10px;
+  border-radius: 10px;
+  padding: 3px 20px;
+
+  color: white;
+}
+
+.unfollow_btn {
+  background-color: rgb(242, 61, 61);
+  margin-right: 10px;
+  border-radius: 10px;
+  padding: 3px 20px;
+
+  color: white;
+}
+
+.message_btn {
+  background-color: #262626;
+  border-radius: 10px;
+  padding: 3px 20px;
+
+  color: white;
+}

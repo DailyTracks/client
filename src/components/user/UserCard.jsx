@@ -1,9 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import classes from "../../styles/UserCard.module.css";
 
 function UserCard({ user }) {
   const [isFollow, setIsFollow] = useState(false);
+  const [isDone, setIsDone] = useState(false);
   const navigate = useNavigate();
   const my = JSON.parse(sessionStorage.getItem("user"));
   const id = my ? my.id : null;
@@ -20,6 +22,7 @@ function UserCard({ user }) {
         if (follow) {
           setIsFollow(true);
         }
+        setIsDone(true);
       })
       .catch((error) => {
         console.log(error);
@@ -66,22 +69,51 @@ function UserCard({ user }) {
         console.log(error);
       });
   };
+
+  const messageHandler = () => {
+    if (id === null) {
+      navigate("/auth?mode=login");
+      return;
+    }
+    navigate("/chat");
+  };
+  const getRandomImageUrl = () => {
+    const randomValue = Math.random().toString(36).substring(2, 15);
+    return `https://source.boringavatars.com/beam?unique=${randomValue}`;
+  };
   return (
     <>
-      <p>id : {user.id}</p>
-      <p>name : {user.username}</p>
-      {!isFollow && (
-        <button
-          onClick={followHandler}
-          style={{ backgroundColor: "lightblue" }}
-        >
-          팔로우
-        </button>
-      )}
-      {isFollow && (
-        <button onClick={unfollowHandler} style={{ backgroundColor: "red" }}>
-          팔로우 취소
-        </button>
+      {isDone && (
+        <div className={classes.profile_container}>
+          <img
+            // src="https://source.boringavatars.com/beam"
+            src={getRandomImageUrl()}
+            alt="profile"
+            className={classes.profile_image}
+          />
+          <div className={classes.profile_details}>
+            <p>id : {user.id}</p>
+            <p>name : {user.username}</p>
+            <div>
+              {!isFollow && (
+                <button onClick={followHandler} className={classes.follow_btn}>
+                  팔로우
+                </button>
+              )}
+              {isFollow && (
+                <button
+                  onClick={unfollowHandler}
+                  className={classes.unfollow_btn}
+                >
+                  팔로우 취소
+                </button>
+              )}
+              <button onClick={messageHandler} className={classes.message_btn}>
+                메시지
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </>
   );
