@@ -3,18 +3,7 @@ import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
 import classes from "../../styles/MyPage.module.css";
 
-import { message } from "antd";
-
-message.config({
-  top: 8,
-  duration: 2,
-  maxCount: 3,
-  rtl: false,
-  prefixCls: "my-message",
-});
-
 function MyPageRoot() {
-  const [messageApi, contextHolder] = message.useMessage();
   const [isLogin, setIsLogin] = useState();
   const navigate = useNavigate();
 
@@ -27,9 +16,6 @@ function MyPageRoot() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const info = () => {
-    messageApi.success("Hello, Ant Design!");
-  };
   return (
     <>
       {isLogin && (
@@ -62,14 +48,12 @@ function MyPageRoot() {
                 </NavLink>
               </li>
               <>
-                {contextHolder}
                 <li>
                   <NavLink
                     to={"follower"}
                     className={({ isActive }) =>
                       isActive ? classes.active : undefined
                     }
-                    onClick={info}
                     end
                   >
                     <i className="fa-solid fa-user-group"></i>

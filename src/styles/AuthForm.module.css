@@ -2,7 +2,7 @@
   max-width: 40rem;
   margin: 2rem auto;
 }
-
+/* 
 .form label,
 .form input,
 .form textarea {
@@ -21,8 +21,8 @@
   gap: 1rem;
   justify-content: flex-end;
   align-items: center;
-}
-
+} */
+/* 
 .actions button {
   font: inherit;
   cursor: pointer;
@@ -37,9 +37,9 @@
   text-decoration: none;
   background-color: transparent;
   color: var(--color-gray-300);
-}
+} */
 
-.actions button:hover {
+/* .actions button:hover {
   background-color: var(--color-primary-300);
 }
 
@@ -53,4 +53,135 @@
 
 .actions .login:hover {
   background-color: rgb(10, 250, 170);
+} */
+
+/* dwdwddwdw */
+
+
+.login_container 
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* min-height: 50vh; */
+  background-color: #000;
+  /* border: 5px solid red; */
+}
+
+
+@keyframes animate 
+{
+  0%
+  {
+    transform: translateY(-100%);
+  }
+  100%
+  {
+    transform: translateY(100%);
+  }
+}
+
+.signin
+{
+  /* position: absolute; */
+  width: 640px;
+  background: #464646;  
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  border-radius: 4px;
+  /* box-shadow: 0 15px 15px rgba(0,0,0,9); */
+}
+.signin .content 
+{
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 30px;
+}
+.signin .content h2 
+{
+  font-size: 2em;
+  color: rgb(255, 255, 255);
+  text-transform: uppercase;
+}
+.signin .content .login_form 
+{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+.signin .content .login_form .inputBox
+{
+  position: relative;
+  width: 100%;
+}
+.signin .content .login_form .inputBox input 
+{
+  position: relative;
+  width: 100%;
+  background: #333;
+  border: none;
+  outline: none;
+  padding: 25px 10px 7.5px;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: 500;
+  font-size: 1em;
+}
+.inputBox i 
+{
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 15px 10px;
+  font-style: normal;
+  color: #aaa;
+  transition: 0.5s;
+  pointer-events: none;
+}
+
+.signin .content .login_form .inputBox input:focus ~ i,
+.signin .content .login_form .inputBox input:valid ~ i
+{
+  transform: translateY(-7.5px);
+  font-size: 0.8em;
+  color: #fff;
+}
+.signin .content .login_form .links 
+{
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+/* .signin .content .login_form .links a 
+{
+  color: #fff;
+  text-decoration: none;
+} */
+/* .signin .content .login_form .links a:nth-child(2)
+{
+  color: #0f0;
+  font-weight: 600;
+} */
+.signin .content .login_form .inputBox input[type="submit"]
+{
+  padding: 10px;
+  background: #0f0;
+  color: #000;
+  font-weight: 600;
+  font-size: 1.35em;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+}
+input[type="submit"]:active
+{
+  opacity: 0.6;
 }

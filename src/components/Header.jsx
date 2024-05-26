@@ -78,8 +78,11 @@ function Header() {
           onKeyDown={enterHandler}
           required
         />
-        <label className={classes.searchlabel} htmlFor="search">
-          {/* 장소나 명소를 입력하세요 */}
+        <label
+          className={classes.searchlabel}
+          htmlFor="search"
+          title="유저를 검색하세요!"
+        >
           유저를 검색하세요!
         </label>
       </div>
@@ -94,7 +97,7 @@ function Header() {
               }
               end
             >
-              로그인 및 회원가입
+              로그인
             </NavLink>
           </li>
         )}

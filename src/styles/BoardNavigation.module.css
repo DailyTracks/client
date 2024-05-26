@@ -1,4 +1,4 @@
-/* .header {
+.header {
   width: 100%;
   margin: 0;
   padding: 1rem 1rem;
@@ -60,7 +60,7 @@
     width: 100%;
   }
 } */ 
-.nav_container {
+/* .nav_container {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -71,7 +71,7 @@
   font-weight: bold;
   font-size: large;
   margin: 0;
-}
+} */
 
 .select {
   display: flex;

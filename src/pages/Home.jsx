@@ -3,6 +3,7 @@ import Map from "../components/Map";
 import Header from "../components/Header";
 import classes from "../styles/Home.module.css";
 import { Outlet } from "react-router-dom";
+import Footer from "../components/Footer";
 
 function Home() {
   // console.log(process.env.REACT_APP_PROXY);
@@ -14,6 +15,7 @@ function Home() {
         <Map />
         <Outlet />
       </main>
+      <Footer />
     </>
   );
 }

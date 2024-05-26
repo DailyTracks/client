@@ -71,7 +71,7 @@ function BoardForm({ method, board }) {
 
     const formData = new FormData();
     formData.append("title", event.target.title.value);
-    formData.append("region", event.target.region.value);
+    // formData.append("region", event.target.region.value);
     formData.append("content", event.target.content.value);
 
     console.log(images);
@@ -105,14 +105,18 @@ function BoardForm({ method, board }) {
           //   replace: true,
           // });
           window.location.replace(`/board/${boardId}${currentSearch}`);
+          return;
         } else if (response.status === 201) {
           // new
           console.log(response);
 
           navigate(`../${response.data.id}${currentSearch}`, { replace: true });
+          console.log("?");
+          return;
         }
         console.log(response);
-        // navigate("..");
+        alert("안됨");
+        return;
       })
       .catch((error) => {
         console.log(error);
@@ -165,7 +169,7 @@ function BoardForm({ method, board }) {
           defaultValue={board ? board.title : ""}
         />
       </p>
-      <p>
+      {/* <p>
         <label htmlFor="region">Region</label>
         <input
           id="region"
@@ -174,7 +178,7 @@ function BoardForm({ method, board }) {
           required
           defaultValue={board ? board.region : ""}
         />
-      </p>
+      </p> */}
       <p>
         <label htmlFor="content">Content</label>
         <textarea

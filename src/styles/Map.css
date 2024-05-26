@@ -8,7 +8,7 @@
   text-decoration: none;
   background-color: slategrey;
   border-radius: 0.5rem;
-  z-index: 1111;
+  z-index: 1000;
 }
 
 .new_btn:hover {
