@@ -70,12 +70,20 @@ function UserCard({ user }) {
       });
   };
 
-  const messageHandler = () => {
+  const messageHandler = async () => {
     if (id === null) {
       navigate("/auth?mode=login");
       return;
     }
-    navigate("/chat");
+    try {
+      const targetId = user.id;
+      await axios.post(`/api/chat/${targetId}`, {
+        withCredentials: true,
+      });
+      navigate("/chat");
+    } catch (err) {
+      navigate("/chat");
+    }
   };
   const getRandomImageUrl = () => {
     const randomValue = Math.random().toString(36).substring(2, 15);
