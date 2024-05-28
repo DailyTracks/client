@@ -14,6 +14,7 @@
     "antd": "^5.17.3",
     "axios": "^1.6.8",
     "bootstrap": "^5.3.3",
+    "framer-motion": "^11.2.6",
     "leaflet": "^1.9.4",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.2",

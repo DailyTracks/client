@@ -12,6 +12,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 function AuthForm() {
   const [searchParams] = useSearchParams();
+
   const isLogin = searchParams.get("mode") === "login";
   const [userData, setUserData] = useState({
     provider: "",
@@ -34,13 +35,6 @@ function AuthForm() {
         console.log(res.data);
         console.log(searchParams);
 
-        // const { id, oauth_provider, username, email } = res.data.user;
-        // setUserData({
-        //   provider: oauth_provider,
-        //   name: username,
-        //   email: email,
-        //   id: id,
-        // });
         setUserData({
           provider: searchParams.get("provider"),
           name: searchParams.get("username"),
@@ -59,85 +53,13 @@ function AuthForm() {
   return (
     <>
       <Form method="post" className={classes.form}>
-        {/* <Form method="post"> */}
-        {/* <h1>{isLogin ? "Log in" : "Create a new user"}</h1> */}
-        {/* <h1>{isLogin ? null : "Create a new user"}</h1> */}
-
         {!isLogin ? (
-          // <>
-          //   <p>
-          //     <label htmlFor="provider">Provider</label>
-          //     <input
-          //       id="provider"
-          //       value={userData.provider}
-          //       type="text"
-          //       name="provider"
-          //       readOnly
-          //     />
-          //   </p>
-          //   <p style={{ display: "none" }}>
-          //     <label htmlFor="id">id</label>
-          //     <input
-          //       id="id"
-          //       value={userData.id}
-          //       type="text"
-          //       name="id"
-          //       readOnly
-          //     />
-          //   </p>
-          //   <p>
-          //     <label htmlFor="username">Username</label>
-          //     <input
-          //       id="username"
-          //       value={userData.name}
-          //       type="text"
-          //       name="username"
-          //       readOnly
-          //     />
-          //   </p>
-          //   <p>
-          //     <label htmlFor="email">Email</label>
-          //     <input
-          //       value={userData.email}
-          //       id="email"
-          //       type="email"
-          //       name="email"
-          //       readOnly
-          //     />
-          //   </p>
-          //   <p>
-          //     <label htmlFor="userId">UserId</label>
-          //     <input
-          //       id="userId"
-          //       type="text"
-          //       name="userId"
-          //       // value={userId}
-          //       // onChange={(e) => setUserId(e.target.value)}
-          //       required
-          //     />
-          //   </p>
-
-          //   <p>
-          //     <label htmlFor="password">Password</label>
-          //     <input
-          //       id="password"
-          //       type="password"
-          //       name="password"
-          //       // value={password}
-          //       // onChange={(e) => setPassword(e.target.value)}
-          //       required
-          //     />
-          //   </p>
-          //   {/* <button onClick={(e) => createProfile(e)}>확인</button> */}
-          //   {/* <button onClick={createProfile}>확인</button> */}
-          //   <button>저장</button>
-          // </>
           <>
             <div className={classes.signin_container}>
               <div className={classes.signin}>
                 <div className={classes.content}>
                   <h2>Sign Up</h2>
-                  <p style={{ color: "whitesmoke" }}>
+                  <p style={{ color: "#222" }}>
                     {isLogin
                       ? null
                       : "추가 정보를 입력하고 회원가입을 완료해주세요."}
@@ -217,20 +139,6 @@ function AuthForm() {
             </div>
           </>
         ) : (
-          // <>
-          //   <p>
-          //     {/* 추후 userid와 email 동시 운용 */}
-          //     <label htmlFor="email">Email</label>
-          //     <input id="email" type="email" name="email" required />
-          //   </p>
-
-          //   <p>
-          //     <label htmlFor="password">Password</label>
-          //     <input id="password" type="password" name="password" required />
-          //   </p>
-
-          //   <NaverLogin />
-          // </>
           <>
             <div className={classes.login_container}>
               <div className={classes.signin}>
@@ -326,7 +234,11 @@ export async function action({ request, params }) {
     sessionStorage.setItem("isLogin", "true");
     sessionStorage.setItem("user", JSON.stringify(response.data.user));
 
-    return redirect("..");
+    // console.log("LOGIN!");
+    // return redirect("..");
+    const redirectUrl =
+      new URL(request.url).searchParams.get("redirectURL") || "..";
+    return redirect(redirectUrl);
   } else {
     throw new Error({ message: "Auth Mode Error" });
   }

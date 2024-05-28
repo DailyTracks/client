@@ -22,18 +22,33 @@ function CommentDetail() {
     }
   }
 
-  // console.log(comment);
+  const dateFormatter = (date) => {
+    const time = new Date(date);
+    const options = {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    };
+
+    const Formatted = time.toLocaleString("ko-KR", options);
+    return Formatted;
+  };
 
   return (
     <>
       <div>
-        <h3>Comment Detail</h3>
         {comment ? (
           <div>
             <div>
               <p className={classes.username}>Username : {comment.author}</p>
               <p className={classes.content}>Comment : {comment.content}</p>
-              <p className={classes.time}>createdAt : {comment.createdAt}</p>
+              <br />
+              <p className={classes.createdAt}>
+                {dateFormatter(comment.createdAt)}
+              </p>
             </div>
             <button className={classes.delete} onClick={deleteHandler}>
               Delete

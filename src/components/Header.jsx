@@ -104,11 +104,13 @@ function Header() {
         {isLogin && (
           <>
             <li>
-              <i
-                class="fa-brands fa-rocketchat fa-2x"
-                onClick={chatHandler}
-                style={chatStyle}
-              ></i>
+              <span style={{ color: "whitesmoke" }}>
+                <i
+                  class="fa-brands fa-rocketchat fa-2x"
+                  onClick={chatHandler}
+                  style={chatStyle}
+                ></i>
+              </span>
             </li>
             <li>
               <NavLink

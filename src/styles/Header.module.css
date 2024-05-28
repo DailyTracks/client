@@ -110,6 +110,10 @@
   background-color: transparent;
 }
 
+.logout {
+  color: whitesmoke;
+}
+
 @media all and (min-width: 1024px) {
 }
 

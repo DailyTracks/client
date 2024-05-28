@@ -1,11 +1,13 @@
-.boards {
-  width: 30%;
+.board_root {
+  width: 40%;
   height: 50vw;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   overflow: scroll;
+  margin: 0 10px;
+  background-color: #F1F1F1;
 }
 
-.boards::-webkit-scrollbar {
+.board_root::-webkit-scrollbar {
   display: none;
 }
 
@@ -14,7 +16,7 @@
 
 /* 테블릿 가로, 테블릿 세로 (해상도 768px ~ 1023px)*/
 @media all and (min-width: 768px) and (max-width: 1023px) {
-  .boards {
+  .board_root {
     width: 100%;
     height: 100%;
     float: none;
@@ -23,7 +25,7 @@
 
 /* 모바일 가로, 모바일 세로 (해상도 480px ~ 767px)*/
 @media all and (max-width: 767px) {
-  .boards {
+  .board_root {
     width: 100%;
     height: 100%;
     float: none;

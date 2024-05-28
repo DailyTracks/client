@@ -12,7 +12,10 @@ function BoardsList({ boards }) {
         .filter((board) => board.region === regionName)
         .map((board) => {
           return (
-            <li key={board.id}>
+            <li
+              key={board.id}
+              style={{ justifyContent: "center", display: "flex" }}
+            >
               <Board board={board} />
             </li>
           );

@@ -15,11 +15,8 @@ function BoardForm({ method, board }) {
   const location = useLocation();
   const currentSearch = location.search;
   const { boardId } = useParams();
-  console.log(boardId);
   const [images, setImages] = useState([]);
   const [previews, setPreviews] = useState([]);
-
-  // const [fileInputKey, setFileInputKey] = useState(0)  ;
 
   const isSubmitting = navigation.state === "submitting";
 
@@ -72,55 +69,93 @@ function BoardForm({ method, board }) {
     const formData = new FormData();
     formData.append("title", event.target.title.value);
     // formData.append("region", event.target.region.value);
+    // formData.append("region", "강원도");
     formData.append("content", event.target.content.value);
 
-    console.log(images);
     images.forEach((image, index) => {
       formData.append("images", image);
     });
 
-    let url = "/api/board";
-    if (method === "put") {
-      url += `/${board.id}`;
-    }
-    console.log("url :" + url);
+    const makeRequest = async () => {
+      let url = "/api/board";
+      if (method === "put") {
+        url += `/${board.id}`;
+      }
 
-    await axios({
-      method: method,
-      // url: url,
-      url: url,
-      data: formData,
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-      withCredentials: true,
-    })
-      .then((response) => {
-        console.log(response.status);
+      try {
+        const response = await axios({
+          method: method,
+          url: url,
+          data: formData,
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          withCredentials: true,
+        });
+
         if (response.status === 200) {
-          // edit
-          console.log(response);
-          // console.log(params);
-          // navigate(`/board/${boardId}${currentSearch}`, {
-          //   replace: true,
-          // });
-          window.location.replace(`/board/${boardId}${currentSearch}`);
-          return;
-        } else if (response.status === 201) {
-          // new
-          console.log(response);
-
+          console.log(response.data);
           navigate(`../${response.data.id}${currentSearch}`, { replace: true });
-          console.log("?");
-          return;
+        } else {
+          console.log("Unexpected status:", response.status);
+          showRegionModalAndResend();
         }
-        console.log(response);
-        alert("안됨");
-        return;
-      })
-      .catch((error) => {
+      } catch (error) {
         console.log(error);
-      });
+      }
+    };
+
+    const showRegionModalAndResend = async () => {
+      try {
+        const region = await showRegionModal(); // Assume this shows the modal and returns the user input
+        formData.append("region", region);
+        await makeRequest(); // Resend the request with the updated formData
+      } catch (error) {
+        console.log("Failed to get region or resend request:", error);
+      }
+    };
+
+    await makeRequest();
+    // await axios({
+    //   method: method,
+    //   // url: url,
+    //   url: url,
+    //   data: formData,
+    //   headers: {
+    //     "Content-Type": "multipart/form-data",
+    //   },
+    //   withCredentials: true,
+    // })
+    //   .then((response) => {
+    //     console.log(response.status);
+    //     if (response.status === 200) {
+    //       console.log(response.data);
+    //       navigate(`../${response.data.id}${currentSearch}`, { replace: true });
+    //       return;
+    //     } else  {
+    //       console.log("else");
+    //       console.log(response);
+    //       console.log(response.data);
+    //       console.log(response.body);
+
+    //       return;
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+  };
+
+  const showRegionModal = () => {
+    return new Promise((resolve, reject) => {
+      // Simulate user input for region
+      const region = prompt("지역을 입력해주세요 :");
+      if (region) {
+        resolve(region);
+      } else {
+        reject("오류 발생");
+      }
+    });
   };
 
   return (
@@ -133,7 +168,7 @@ function BoardForm({ method, board }) {
                 <img
                   src={preview}
                   alt={`Preview ${index}`}
-                  className={classes.preview}
+                  className={classes.preview_image}
                   onClick={() => removeImageHandler(index)}
                 />
               </li>

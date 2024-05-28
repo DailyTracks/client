@@ -56,7 +56,8 @@ function BoardDetail() {
 
   const likeHandler = () => {
     if (!isLogin) {
-      navigate("/auth?mode=login");
+      // navigate("/auth?mode=login");
+      navigate(`/auth?mode=login&redirectURL=${location.pathname}`);
     }
 
     console.log(loadedBoard);
@@ -120,6 +121,14 @@ function BoardDetail() {
               <p className={classes.content}>{loadedBoard.content.content}</p>
             </div>
             <button
+              onClick={() => {
+                navigate(`/board${currentSearch}`, { replace: true });
+              }}
+              className={classes.back}
+            >
+              <i class="fa-solid fa-arrow-left"></i>
+            </button>
+            <button
               onClick={likeHandler}
               className={classes.like}
             >{`좋아요 ${loadedBoard.like_count}`}</button>
@@ -139,14 +148,6 @@ function BoardDetail() {
               </button>
             )}
 
-            <button
-              onClick={() => {
-                navigate(`/board${currentSearch}`, { replace: true });
-              }}
-              className={classes.back}
-            >
-              Back
-            </button>
             <p className={classes.hit_count}>
               {`조회수 : ${loadedBoard.hit_count}`}
             </p>

@@ -1,38 +1,19 @@
 import classes from "../../styles/BoardNavigation.module.css";
-import { useSearchParams } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 
 function BoardNavigation({ onChange, order }) {
   const [searchParams] = useSearchParams();
+  const location = useLocation();
   const regionName = searchParams.get("region");
 
-  // return (
-  //   <div className={classes.nav_container}>
-  //     <p className={classes.region}>{regionName}</p>
-  //     <FormControl
-  //       sx={{ m: 1, minWidth: 120 }}
-  //       size="small"
-  //       className={classes.select}
-  //     >
-  //       <InputLabel id="demo-select-small-label">정렬</InputLabel>
-  //       <Select
-  //         labelId="demo-select-small-label"
-  //         id="demo-select-small"
-  //         value={order}
-  //         label="Age"
-  //         onChange={onChange}
-  //       >
-  //         <MenuItem value="recent">최신순</MenuItem>
-  //         <MenuItem value="like">좋아요순</MenuItem>
-  //         <MenuItem value="hit">조회순</MenuItem>
-  //       </Select>
-  //     </FormControl>
-  //   </div>
-  // );
+  if (location.pathname !== "/board") {
+    return <></>;
+  }
 
   return (
     <header className={classes.header}>
       <nav className={classes.nav}>
-        <div>{regionName}</div>
+        <p className={classes.region}>{regionName}</p>
         <div className={classes.orders}>
           <label htmlFor="order" className={classes.orderlabel}>
             정렬

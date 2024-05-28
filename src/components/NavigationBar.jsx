@@ -21,7 +21,7 @@ function NavigationBar() {
   // );
   return (
     <div
-      style={{ height: "150px", backgroundColor: "gray", marginTop: "20px" }}
+      style={{ height: "100px", backgroundColor: "gray", marginTop: "20px" }}
     ></div>
   );
 }

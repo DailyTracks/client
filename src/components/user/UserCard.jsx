@@ -81,6 +81,7 @@ function UserCard({ user }) {
     const randomValue = Math.random().toString(36).substring(2, 15);
     return `https://source.boringavatars.com/beam?unique=${randomValue}`;
   };
+
   return (
     <>
       {isDone && (
