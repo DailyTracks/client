@@ -5,6 +5,7 @@ import classes from "../styles/Home.module.css";
 import { Outlet } from "react-router-dom";
 import Footer from "../components/Footer";
 
+
 function Home() {
   // console.log(process.env.REACT_APP_PROXY);
   return (
@@ -13,6 +14,7 @@ function Home() {
       <NavigationBar />;
       <main className={classes.home}>
         <Map />
+
         <Outlet />
       </main>
       <Footer />
