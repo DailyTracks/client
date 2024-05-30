@@ -51,7 +51,7 @@ function Header() {
 
   const enterHandler = (event) => {
     if (event.key === "Enter") {
-      navigate(`/search?q=${searchText}`);
+      navigate(`/search?name=${searchText}`);
     }
   };
 
@@ -66,7 +66,7 @@ function Header() {
   return (
     <header className={classes.header}>
       <Link to="/" className={classes.logo}>
-        DailyTasks
+        DailyTracks
       </Link>
       <div className={classes.entryarea}>
         <input
@@ -89,7 +89,7 @@ function Header() {
 
       <ul className={classes.auth}>
         {!isLogin && (
-          <li>
+          <li className={classes.navLink}>
             <NavLink
               to="/auth?mode=login"
               className={({ isActive }) =>
@@ -106,19 +106,25 @@ function Header() {
             <li>
               <span style={{ color: "whitesmoke" }}>
                 <i
-                  class="fa-brands fa-rocketchat fa-2x"
+                  className="fa-brands fa-facebook-messenger fa-2x"
                   onClick={chatHandler}
                   style={chatStyle}
                 ></i>
+                {/* <i
+                  className="fa-regular fa-paper-plane fa-2x"
+                  onClick={chatHandler}
+                  style={chatStyle}
+                ></i> */}
+                {/* <i className="fa-brands fa-rocketchat fa-2x"></i> */}
               </span>
             </li>
-            <li>
+            <li className={classes.navLink}>
               <NavLink
                 to="/user/mypage"
                 className={({ isActive }) =>
                   isActive ? classes.active : undefined
                 }
-                end
+                // end
               >
                 MyPage
               </NavLink>

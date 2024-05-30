@@ -87,7 +87,6 @@ function UserCard({ user }) {
       {isDone && (
         <div className={classes.profile_container}>
           <img
-            // src="https://source.boringavatars.com/beam"
             src={getRandomImageUrl()}
             alt="profile"
             className={classes.profile_image}

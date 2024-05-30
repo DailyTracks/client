@@ -11,7 +11,6 @@ function UserFollowingPage() {
     axios
       .get(`/api/user/${id}/following`)
       .then((response) => {
-        console.log(response);
         if (response.data.length === 0) {
           setUsers(null);
           return;

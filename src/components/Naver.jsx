@@ -32,10 +32,10 @@ function Naver() {
   return (
     <>
       {/* <button onClick={(e) => handlerLogin(e)}>네이버로 간편가입하기</button> */}
-      <button style={btnStyle} onClick={(e) => handlerLogin(e)}>
+      <div style={btnStyle} onClick={(e) => handlerLogin(e)}>
         <img src={NaverIcon} style={iconStyle} alt="navericon" />
         <span style={spanStyle}> 네이버로 간편가입하기</span>
-      </button>
+      </div>
     </>
   );
 }

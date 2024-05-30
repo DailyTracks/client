@@ -1,4 +1,5 @@
 import classes from "../styles/Footer.module.css";
+import { Link } from "react-router-dom";
 
 function Footer() {
   return (
@@ -9,16 +10,16 @@ function Footer() {
             <h4>company</h4>
             <ul>
               <li>
-                <a href="#">about us</a>
+                <Link to="#">about us</Link>
               </li>
               <li>
-                <a href="#">our services</a>
+                <Link to="#">our services</Link>
               </li>
               <li>
-                <a href="#">privacy policy</a>
+                <Link to="#">privacy policy</Link>
               </li>
               <li>
-                <a href="#">affiliate program</a>
+                <Link to="#">affiliate program</Link>
               </li>
             </ul>
           </div>
@@ -26,19 +27,19 @@ function Footer() {
             <h4>get help</h4>
             <ul>
               <li>
-                <a href="#">FAQ</a>
+                <Link to="#">FAQ</Link>
               </li>
               <li>
-                <a href="#">shipping</a>
+                <Link to="#">shipping</Link>
               </li>
               <li>
-                <a href="#">returns</a>
+                <Link to="#">returns</Link>
               </li>
               <li>
-                <a href="#">order status</a>
+                <Link to="#">order status</Link>
               </li>
               <li>
-                <a href="#">payment options</a>
+                <Link to="#">payment options</Link>
               </li>
             </ul>
           </div>
@@ -46,38 +47,34 @@ function Footer() {
             <h4>online shop</h4>
             <ul>
               <li>
-                <a href="#">watch</a>
+                <Link to="#">watch</Link>
               </li>
               <li>
-                <a href="#">bag</a>
+                <Link to="#">bag</Link>
               </li>
               <li>
-                <a href="#">shoes</a>
+                <Link to="#">shoes</Link>
               </li>
               <li>
-                <a href="#">dress</a>
+                <Link to="#">dress</Link>
               </li>
             </ul>
           </div>
           <div className={classes.footer_col}>
             <h4>follow us</h4>
             <div className={classes.social_links}>
-              <a href="#">
-                {/* <i className={classes.fab_fa_linkedin_in}></i> */}
-                <i class="fa-brands fa-github"></i>
-              </a>
-              <a href="#">
-                {/* <i className={classes.fab_fa_instagram}></i> */}
-                <i class="fa-brands fa-instagram"></i>
-              </a>
-              <a href="#">
-                {/* <i className={classes.fab_fa_facebook_f}></i> */}
-                <i class="fa-brands fa-facebook"></i>
-              </a>
-              <a href="#">
-                {/* <i className={classes.fab_fa_twitter}></i> */}
-                <i class="fa-brands fa-twitter"></i>
-              </a>
+              <Link to="#">
+                <i className="fa-brands fa-github"></i>
+              </Link>
+              <Link to="#">
+                <i className="fa-brands fa-instagram"></i>
+              </Link>
+              <Link to="#">
+                <i className="fa-brands fa-facebook"></i>
+              </Link>
+              <Link to="#">
+                <i className="fa-brands fa-twitter"></i>
+              </Link>
             </div>
           </div>
         </div>

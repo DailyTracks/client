@@ -30,10 +30,6 @@ function BoardsRoot() {
       <BoardNavigation onChange={changeHandler} order={order} />
       <Outlet />
     </motion.div>
-    // <div className={classes.board_root}>
-    //   <BoardNavigation onChange={changeHandler} order={order} />
-    //   <Outlet />
-    // </div>
   );
 }
 

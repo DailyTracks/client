@@ -22,20 +22,20 @@ function Board({ board }) {
         {board.title}
       </Link>
       <div className={classes.image_container}>
-        {board.content.images.map((image, index) => (
+        <img
+          src={process.env.REACT_APP_PROXY + board.content.images[0]}
+          className={classes.image}
+          alt={`${board.id}`}
+        />
+        {/* {board.content.images.map((image, index) => (
           <img
             key={index}
             src={process.env.REACT_APP_PROXY + image}
             className={classes.image}
             alt={`Image ${index}`}
           />
-        ))}
+        ))} */}
       </div>
-      {/* <img
-        src={process.env.REACT_APP_PROXY + board.content.images[0]}
-        className={classes.image}
-        alt={`Image[0]`}
-      /> */}
       <p className={classes.content}>
         {truncateContent(board.content.content, 5)}
       </p>

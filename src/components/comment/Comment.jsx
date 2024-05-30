@@ -27,7 +27,6 @@ function Comment({ comment }) {
     <>
       <div className={classes.comment}>
         <img
-          // src="https://source.boringavatars.com/beam"
           src={getRandomImageUrl()}
           alt="profile"
           className={classes.profile_image}

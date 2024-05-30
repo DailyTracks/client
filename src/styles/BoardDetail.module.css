@@ -7,10 +7,6 @@
 .title {
   font-size: 1.1rem;
 }
-
-/* .author {
-} */
-
 .region {
   font-size: 1rem;
 }
@@ -77,11 +73,16 @@
 .new {
   text-decoration: none;
   font-size: 1.2rem;
-  border: 1px solid yellowgreen;
+  border: 1px solid rgb(169, 169, 169);
   border-radius: 0.5rem;
-  background-color: yellowgreen;
-  color: white;
+  background-color: white;
+  color: #222;
   padding: 5px 10px;
+
+  &:hover {
+    background-color: #222;
+    color: white;
+  }
 }
 
 .hit_count {
