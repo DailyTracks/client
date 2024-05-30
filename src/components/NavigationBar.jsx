@@ -37,19 +37,7 @@ function NavigationBar() {
 
   return (
     <div className={classes.navBar} onWheel={handleWheel} ref={navBarRef}>
-      <button
-        style={{
-          minWidth: "100px",
-          height: "100px",
-          border: "none",
-          borderRadius: "20px",
-          boxShadow: "5px 5px 10px 5px gray",
-          backgroundColor: "#222",
-          color: "white",
-          fontSize: "20px",
-        }}
-        onClick={openNewBoardPage}
-      >
+      <button className={classes.new_btn} onClick={openNewBoardPage}>
         New
       </button>
       {recentBoards &&

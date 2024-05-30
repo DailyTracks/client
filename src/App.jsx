@@ -29,7 +29,6 @@ import SearchPage from "./pages/SearchPage";
 import { loader as searchLoader } from "./pages/SearchPage";
 import UserFollowerPage from "./pages/mypage/UserFollowerPage";
 import UserWrite from "./pages/mypage/UserWrite";
-import UserWriteDetail from "./pages/mypage/UserWriteDetail";
 
 const router = createBrowserRouter([
   {
@@ -106,7 +105,6 @@ const router = createBrowserRouter([
       { path: "follower", element: <UserFollowerPage /> },
       { path: "edit", element: <UserEditPage />, action: userFormAction },
       { path: "written", element: <UserWrite /> },
-      { path: "written/:boardId", element: <UserWriteDetail /> },
     ],
   },
   {

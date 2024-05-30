@@ -47,7 +47,7 @@ function BoardForm({ method, board }) {
 
     var idxDot = fileName.lastIndexOf(".") + 1;
     var extFile = fileName.substr(idxDot, fileName.length).toLowerCase();
-    if (!(extFile == "jpg" || extFile == "jpeg")) {
+    if (!(extFile === "jpg" || extFile === "jpeg")) {
       alert("Only jpg/jpeg and png files are allowed!");
       return;
     }
