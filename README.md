@@ -1,6 +1,6 @@
 # DailyTracks Client
 
-해당 레포는 플랫폼 서버에 대한 레포입니다.
+해당 레포는 클라이언트에 대한 레포입니다.
 
 ## Instruction to Tech
 
@@ -21,7 +21,6 @@
   - react-toastify
   - socket.io-client
 
-
 ## Installation Instructions
 
 1. clone the repository
@@ -35,10 +34,15 @@ git clone https://github.com/DailyTracks/client
 ```powershell
 npm install
 ```
+
+3. run App.jsx
+
+```powershell
+npm start
+```
+
 or
 
 ```powershell
 nodemon App.jsx
 ```
-
-3. run App.jsx
