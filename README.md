@@ -20,11 +20,7 @@
   - react-scripts
   - react-toastify
   - socket.io-client
-  
-- infra environment
-  - aws ec2
-- proxy
-  - nginx
+
 
 ## Installation Instructions
 
