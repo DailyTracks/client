@@ -89,13 +89,5 @@ export async function action({ params, request }) {
 
   console.log(response);
 
-  // if (response.status !== 200) {
-  //   throw json(
-  //     { message: "Could not delete comment." },
-  //     {
-  //       status: 500,
-  //     }
-  //   );
-  // }
   return redirect(`/board/${boardId}`);
 }

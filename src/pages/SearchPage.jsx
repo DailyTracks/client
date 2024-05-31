@@ -45,7 +45,6 @@ async function loadUsers(name) {
 }
 
 export function loader({ request }) {
-  // params는 추후 구현
   const name = new URL(request.url).searchParams.get("name");
   return defer({
     users: loadUsers(name),

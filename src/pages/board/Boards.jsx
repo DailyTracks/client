@@ -9,7 +9,6 @@ function Boards() {
   useEffect(() => {
     events
       .then((result) => {
-        console.log(result);
         setLoadedBoards(result);
       })
       .catch((error) => {
@@ -44,7 +43,6 @@ async function loadBoards(region, type) {
   }
 
   const response = await fetch(url);
-  // console.log(response);
 
   if (!response.ok) {
     console.error(`Error: ${response.status} - ${response.statusText}`);
@@ -56,7 +54,6 @@ async function loadBoards(region, type) {
     );
   } else {
     const resData = await response.json();
-    console.log(response);
     return resData;
   }
 }

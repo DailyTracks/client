@@ -2,7 +2,6 @@ import Header from "../components/Header";
 import AuthForm from "../components/AuthForm";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import Footer from "../components/Footer";
 
 function Authentication() {
   const navigate = useNavigate();
@@ -15,16 +14,9 @@ function Authentication() {
   }, []);
 
   return (
-    <div
-      style={
-        {
-          // backgroundColor: "#a2a2a2",
-        }
-      }
-    >
+    <div>
       <Header />
       <AuthForm />
-      {/* <Footer /> */}
     </div>
   );
 }

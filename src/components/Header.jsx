@@ -24,13 +24,6 @@ function Header() {
 
   function logoutHandler() {
     setIsModalVisible(true);
-
-    // if (window.confirm("로그아웃 하시겠습니까?")) {
-    //   sessionStorage.removeItem("user");
-    //   sessionStorage.setItem("isLogin", "false");
-    //   dispatch(authActions.logout());
-    //   navigate("/");
-    // }
   }
 
   const handleOk = () => {
@@ -110,12 +103,6 @@ function Header() {
                   onClick={chatHandler}
                   style={chatStyle}
                 ></i>
-                {/* <i
-                  className="fa-regular fa-paper-plane fa-2x"
-                  onClick={chatHandler}
-                  style={chatStyle}
-                ></i> */}
-                {/* <i className="fa-brands fa-rocketchat fa-2x"></i> */}
               </span>
             </li>
             <li className={classes.navLink}>

@@ -9,7 +9,6 @@ function EditBoard() {
   useEffect(() => {
     board
       .then((result) => {
-        console.log(result);
         setLoadedBoard(result);
       })
       .catch((error) => {

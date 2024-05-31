@@ -25,13 +25,10 @@ function Naver() {
     fontWeight: "400",
     fontSize: "18px",
     color: "white",
-    // font - size: 14px;
-    // line - height: 24px;
   };
 
   return (
     <>
-      {/* <button onClick={(e) => handlerLogin(e)}>네이버로 간편가입하기</button> */}
       <div style={btnStyle} onClick={(e) => handlerLogin(e)}>
         <img src={NaverIcon} style={iconStyle} alt="navericon" />
         <span style={spanStyle}> 네이버로 간편가입하기</span>

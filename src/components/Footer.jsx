@@ -15,18 +15,15 @@ function Footer() {
           <div className={classes.footer_col}>
             <h4>회사 정보</h4>
             <p>
-              라이프 로깅은 일상을 기록하고 공유하는 SNS 서비스입니다.
-              {/* 여러분의
-              소중한 순간들을 기록하여 추억을 남기고, 친구들과 함께 나눌 수 있는
-              공간을 제공합니다. 우리와 함께 하루하루를 기록해보세요! */}
+              DailyTracks는 라이프 로깅으로써 일상을 기록하고 공유하는 SNS
+              서비스입니다.
             </p>
           </div>
           <div className={classes.footer_col}>
             <h4>고객 지원</h4>
             <p>
               고객 지원팀은 여러분의 모든 질문과 문의사항에 대해 도와드립니다.
-              {/* 자주 묻는 질문, 이용약관, 개인정보 처리방침 등에 대한 자세한
-              내용을 확인하고 싶으시다면 아래 링크를 참고해주세요. */}
+              질문과 문의사항이 있을 시 Github 를 통해 도와드립니다.
             </p>
           </div>
           <div className={classes.footer_col}>
@@ -34,8 +31,6 @@ function Footer() {
             <p>
               dailyTracks는 여러분의 소셜 미디어 생활을 더욱 풍부하게
               만들어줍니다.
-              {/* 최신 음악 트랙을 발견하고, 친구들과 공유하고,
-              좋아하는 아티스트와 소통하세요. */}
             </p>
           </div>
           <div className={classes.footer_col}>

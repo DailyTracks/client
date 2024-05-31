@@ -27,14 +27,6 @@ function Board({ board }) {
           className={classes.image}
           alt={`${board.id}`}
         />
-        {/* {board.content.images.map((image, index) => (
-          <img
-            key={index}
-            src={process.env.REACT_APP_PROXY + image}
-            className={classes.image}
-            alt={`Image ${index}`}
-          />
-        ))} */}
       </div>
       <p className={classes.content}>
         {truncateContent(board.content.content, 5)}

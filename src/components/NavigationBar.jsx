@@ -12,7 +12,6 @@ function NavigationBar() {
     axios
       .get("/api/board?limit=10", { withCredentials: true })
       .then((response) => {
-        console.log(response.data);
         setRecentBoards(response.data);
       })
       .catch((error) => {
@@ -27,7 +26,6 @@ function NavigationBar() {
   };
 
   const detailBoardHandler = (board) => {
-    console.log(board);
     navigate(`/board/${board.id}`);
   };
 

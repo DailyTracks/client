@@ -71,7 +71,6 @@ export async function action({ request, params }) {
     const commentId = params.commentId;
     url = "/api/comment/" + commentId;
   }
-  console.log(url);
 
   const response = await fetch(url, {
     method: method,

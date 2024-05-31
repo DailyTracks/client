@@ -20,7 +20,6 @@ function Map() {
     axios
       .get("api/board/geo-status", { withCredentials: true })
       .then((response) => {
-        console.log(response.data);
         setGeoStatus(response.data);
       })
       .catch((error) => {

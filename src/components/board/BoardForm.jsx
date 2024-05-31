@@ -95,11 +95,14 @@ function BoardForm({ method, board }) {
           withCredentials: true,
         });
 
-        console.log(response);
-
         if (response.status === 200) {
-          window.location.href = `/board/${board.id}${currentSearch}`;
-          // navigate(`../${response.data.id}${currentSearch}`, { replace: true });
+          if (method === "put") {
+            window.location.href = `/board/${board.id}${currentSearch}`;
+          } else {
+            navigate(`../${response.data.id}${currentSearch}`, {
+              replace: true,
+            });
+          }
         } else {
         }
       } catch (error) {
