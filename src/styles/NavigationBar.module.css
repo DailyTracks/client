@@ -1,0 +1,48 @@
+.navBar {
+  display: flex;
+  padding: 10px 10px 20px 10px;
+  gap: 50px;
+  /* background-color: #8e8e8e; */
+  /* border-bottom: 3px dotted black; */
+  /* box-shadow: 5px 5px 100px 50px gray; */
+  margin: 5px 0;
+  white-space: nowrap;
+  overflow-x: scroll;
+}
+.navBar::-webkit-scrollbar {
+  display: none;
+}
+
+.new_btn {
+  min-width: 100px;
+  height: 100px;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 5px 5px 10px 5px gray;
+  background-color: #222;
+  color: white;
+  font-size: 20px;
+
+  &:hover {
+    transform: scale(1.05);
+    background-color: rgb(91, 91, 91);
+  }
+}
+
+.image {
+  /* border: 2px solid black; */
+  padding: 0;
+
+  border-radius: 20px;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  cursor: pointer;
+  transition: transform 0.3s;
+  box-shadow: 5px 5px 10px 5px gray;
+  flex-shrink: 0; /* 이미지들이 축소되지 않도록 설정합니다. */
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}

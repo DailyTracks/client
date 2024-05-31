@@ -1,28 +1,54 @@
-import React from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-// import { Navbar, Nav, Container } from "react-bootstrap";
+import React, { useEffect, useState, useRef } from "react";
+import axios from "axios";
+import classes from "../styles/NavigationBar.module.css";
+import { useNavigate } from "react-router-dom";
 
 function NavigationBar() {
-  // return (
-  //   <Navbar bg="dark" variant="dark" expand="lg">
-  //     <Container>
-  //       <Navbar.Brand href="#home">DailyTracks</Navbar.Brand>
-  //       <Navbar.Toggle aria-controls="basic-navbar-nav" />
-  //       <Navbar.Collapse id="basic-navbar-nav">
-  //         <Nav className="me-auto">
-  //           <Nav.Link href="#home">category</Nav.Link>
-  //           <Nav.Link href="#link">category</Nav.Link>
-  //           <Nav.Link href="#about">category</Nav.Link>
-  //           <Nav.Link href="#category">Contact</Nav.Link>
-  //         </Nav>
-  //       </Navbar.Collapse>
-  //     </Container>
-  //   </Navbar>
-  // );
+  const [recentBoards, setRecentBoards] = useState(null);
+  const navBarRef = useRef(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    axios
+      .get("/api/board?limit=10", { withCredentials: true })
+      .then((response) => {
+        setRecentBoards(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  const handleWheel = (e) => {
+    const container = navBarRef.current;
+    container.scrollLeft += e.deltaY;
+    container.scrollBottom += 0;
+  };
+
+  const detailBoardHandler = (board) => {
+    navigate(`/board/${board.id}`);
+  };
+
+  function openNewBoardPage() {
+    navigate("/board/new");
+  }
+
   return (
-    <div
-      style={{ height: "100px", backgroundColor: "gray", marginTop: "20px" }}
-    ></div>
+    <div className={classes.navBar} onWheel={handleWheel} ref={navBarRef}>
+      <button className={classes.new_btn} onClick={openNewBoardPage}>
+        New
+      </button>
+      {recentBoards &&
+        recentBoards.map((board, index) => (
+          <img
+            src={process.env.REACT_APP_PROXY + board.content.images[0]}
+            alt={board.content.images[0]}
+            key={index}
+            className={classes.image}
+            onClick={() => detailBoardHandler(board)}
+          />
+        ))}
+    </div>
   );
 }
 

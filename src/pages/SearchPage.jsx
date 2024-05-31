@@ -21,10 +21,19 @@ function SearchPage() {
 
 export default SearchPage;
 
-async function loadUsers() {
-  const response = await axios.get("/api/user", {
+async function loadUsers(name) {
+  let url = "/api/user";
+
+  if (name) {
+    url += "?name=" + name;
+  }
+
+  console.log(url);
+  const response = await axios.get(url, {
     withCredentials: true,
   });
+
+  console.log(response);
 
   if (response.status !== 200) {
     return new Error("failed to users");
@@ -35,9 +44,9 @@ async function loadUsers() {
   return resData;
 }
 
-export function loader() {
-  // params는 추후 구현
+export function loader({ request }) {
+  const name = new URL(request.url).searchParams.get("name");
   return defer({
-    users: loadUsers(),
+    users: loadUsers(name),
   });
 }

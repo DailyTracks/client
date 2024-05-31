@@ -3,11 +3,9 @@ import {
   useNavigate,
   useNavigation,
   useLocation,
-  json,
   redirect,
 } from "react-router-dom";
 import classes from "../../styles/BoardForm.module.css";
-import axios from "axios";
 
 function CommentForm({ method }) {
   const navigate = useNavigate();
@@ -73,7 +71,6 @@ export async function action({ request, params }) {
     const commentId = params.commentId;
     url = "/api/comment/" + commentId;
   }
-  console.log(url);
 
   const response = await fetch(url, {
     method: method,
@@ -84,18 +81,6 @@ export async function action({ request, params }) {
     credentials: "include",
   });
 
-  // const response2 = await axios({
-  //   url: url,
-  //   method: method,
-  //   data: commentData,
-  //   headers: { "Content-Type": "application/json" },
-  //   // {withCredentials: true}
-  //   withCredentials: true,
-  // });
-
-  // if (!response.ok) {
-  //   throw json({ message: "Could not save comment." }, { status: 500 });
-  // }
   console.log(response);
 
   if (method === "PUT") {
@@ -103,5 +88,4 @@ export async function action({ request, params }) {
   }
 
   return redirect("..");
-  // return window.history.go(-1);
 }

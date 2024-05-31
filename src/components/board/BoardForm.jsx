@@ -3,7 +3,6 @@ import {
   useNavigate,
   useNavigation,
   useLocation,
-  useParams,
 } from "react-router-dom";
 import { useEffect, useState } from "react";
 import classes from "../../styles/BoardForm.module.css";
@@ -14,7 +13,6 @@ function BoardForm({ method, board }) {
   const navigation = useNavigation();
   const location = useLocation();
   const currentSearch = location.search;
-  const { boardId } = useParams();
   const [images, setImages] = useState([]);
   const [previews, setPreviews] = useState([]);
 
@@ -35,8 +33,6 @@ function BoardForm({ method, board }) {
         setPreviews(imageFiles.map((file) => URL.createObjectURL(file)));
       };
       fetchImages();
-      console.log(images);
-      console.log(previews);
     }
   }, [board]);
 
@@ -47,6 +43,15 @@ function BoardForm({ method, board }) {
   const addImageHandler = (event) => {
     const files = Array.from(event.target.files);
 
+    var fileName = document.getElementById("images").value;
+
+    var idxDot = fileName.lastIndexOf(".") + 1;
+    var extFile = fileName.substr(idxDot, fileName.length).toLowerCase();
+    if (!(extFile === "jpg" || extFile === "jpeg")) {
+      alert("Only jpg/jpeg and png files are allowed!");
+      return;
+    }
+
     if (images.length + files.length > 5) {
       alert("You can only upload a maximum of 5 images.");
       return;
@@ -55,7 +60,6 @@ function BoardForm({ method, board }) {
     const imagePreviews = files.map((file) => URL.createObjectURL(file));
     setPreviews((prevPreviews) => [...prevPreviews, ...imagePreviews]);
     setImages((prevImages) => [...prevImages, ...files]);
-    // setFileInputKey((prevKey) => prevKey + 1);
   };
 
   const removeImageHandler = (index) => {
@@ -68,8 +72,6 @@ function BoardForm({ method, board }) {
 
     const formData = new FormData();
     formData.append("title", event.target.title.value);
-    // formData.append("region", event.target.region.value);
-    // formData.append("region", "강원도");
     formData.append("content", event.target.content.value);
 
     images.forEach((image, index) => {
@@ -94,61 +96,37 @@ function BoardForm({ method, board }) {
         });
 
         if (response.status === 200) {
-          console.log(response.data);
-          navigate(`../${response.data.id}${currentSearch}`, { replace: true });
+          if (method === "put") {
+            window.location.href = `/board/${board.id}${currentSearch}`;
+          } else {
+            navigate(`../${response.data.id}${currentSearch}`, {
+              replace: true,
+            });
+          }
         } else {
-          console.log("Unexpected status:", response.status);
-          showRegionModalAndResend();
         }
       } catch (error) {
         console.log(error);
+        if (error.response.data.err_code === -1)
+          await showRegionModalAndResend();
       }
     };
 
     const showRegionModalAndResend = async () => {
       try {
-        const region = await showRegionModal(); // Assume this shows the modal and returns the user input
+        const region = await showRegionModal();
         formData.append("region", region);
-        await makeRequest(); // Resend the request with the updated formData
+        await makeRequest();
       } catch (error) {
         console.log("Failed to get region or resend request:", error);
       }
     };
 
     await makeRequest();
-    // await axios({
-    //   method: method,
-    //   // url: url,
-    //   url: url,
-    //   data: formData,
-    //   headers: {
-    //     "Content-Type": "multipart/form-data",
-    //   },
-    //   withCredentials: true,
-    // })
-    //   .then((response) => {
-    //     console.log(response.status);
-    //     if (response.status === 200) {
-    //       console.log(response.data);
-    //       navigate(`../${response.data.id}${currentSearch}`, { replace: true });
-    //       return;
-    //     } else  {
-    //       console.log("else");
-    //       console.log(response);
-    //       console.log(response.data);
-    //       console.log(response.body);
-
-    //       return;
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
   };
 
   const showRegionModal = () => {
     return new Promise((resolve, reject) => {
-      // Simulate user input for region
       const region = prompt("지역을 입력해주세요 :");
       if (region) {
         resolve(region);
@@ -188,7 +166,7 @@ function BoardForm({ method, board }) {
             className={classes.images}
             type="file"
             name="images"
-            accept="image/*"
+            accept=".jpg, .jpeg"
             multiple
             onChange={addImageHandler}
           />
@@ -204,16 +182,6 @@ function BoardForm({ method, board }) {
           defaultValue={board ? board.title : ""}
         />
       </p>
-      {/* <p>
-        <label htmlFor="region">Region</label>
-        <input
-          id="region"
-          type="text"
-          name="region"
-          required
-          defaultValue={board ? board.region : ""}
-        />
-      </p> */}
       <p>
         <label htmlFor="content">Content</label>
         <textarea
@@ -229,7 +197,7 @@ function BoardForm({ method, board }) {
           Cancel
         </button>
 
-        <button disabled={isSubmitting}>
+        <button type="submit" disabled={isSubmitting}>
           {isSubmitting ? "Submitting..." : "Save"}
         </button>
       </div>
@@ -238,73 +206,3 @@ function BoardForm({ method, board }) {
 }
 
 export default BoardForm;
-
-// export async function action({ request, params }) {
-//   const method = request.method;
-//   const data = await request.formData();
-
-//   const boardData = {
-//     title: data.get("title"),
-//     content: data.get("content"),
-//     // region: data.get("region"),
-//   };
-
-//   let url = "/api/board";
-
-//   if (method === "PUT") {
-//     const boardId = params.boardId;
-//     url = "/api/board/" + boardId;
-//   }
-
-//   const response = await fetch(url, {
-//     method: method,
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify(boardData),
-//   });
-
-//   console.log(response);
-
-//   if (!response.ok) {
-//     // throw json({ message: "Could not save board." }, { status: 500 });
-//     throw new Error({ message: "Could not save board." }, { status: 500 });
-//   }
-
-//   return redirect("..");
-// }
-
-// const submitHandler = async (event) => {
-//   event.preventDefault();
-//   setIsSubmitting(true);
-
-//   if (images.length < 1 || images.length > 5) {
-//     alert("Please select between 1 and 5 images.");
-//     setIsSubmitting(false);
-//     return;
-//   }
-
-//   const formData = new FormData(event.target);
-
-//   images.forEach((image, index) => {
-//     formData.append("images", image);
-//   });
-
-//   try {
-//     const response = await fetch("/your-endpoint", {
-//       method: method,
-//       body: formData,
-//     });
-
-//     if (!response.ok) {
-//       throw new Error("Failed to submit form");
-//     }
-
-//     // handle successful submission
-//   } catch (error) {
-//     // handle error
-//     console.error("Error:", error);
-//   } finally {
-//     setIsSubmitting(false);
-//   }
-// };

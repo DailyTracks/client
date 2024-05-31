@@ -1,22 +1,31 @@
 import React from "react";
-import { MapContainer, TileLayer, GeoJSON, useMapEvents } from "react-leaflet";
+import { MapContainer, TileLayer, GeoJSON } from "react-leaflet";
 import "../styles/Map.css";
 import "leaflet/dist/leaflet.css";
 import { useState, useEffect } from "react";
 import geojson from "../datas/korea.json";
+import axios from "axios";
 
 import { useNavigate } from "react-router-dom";
 
 function Map() {
   const navigate = useNavigate();
+  const [geoStatus, setGeoStatus] = useState([]);
+
   const handleClick = (regionTerm) => {
     navigate(`/board?region=${encodeURIComponent(regionTerm)}`);
-    // navigate(`/board?region=${regionTerm}`);
   };
 
-  function openNewBoardPage() {
-    navigate("/board/new");
-  }
+  useEffect(() => {
+    axios
+      .get("api/board/geo-status", { withCredentials: true })
+      .then((response) => {
+        setGeoStatus(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   const configMap = {
     center: [36.5, 127.5],
@@ -28,34 +37,24 @@ function Map() {
     },
   };
 
-  // const handlerGEOShape = (e, feature) => {
-  //   console.log(feature);
-  // };
-
-  const getRandomColor = () => {
-    const letters = "0123456789ABCDEF";
-    let color = "#";
-    for (let i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-  };
-
   const getColor = (regionName) => {
-    return getRandomColor();
-    // switch (regionName) {
-    //   case "서울특별시":
-    //     return "#ff0000";
-    //   case "부산광역시":
-    //     return "#00ff00";
-    //   case "대구광역시":
-    //     return "#0000ff";
-    //   case "강원도":
-    //     return "#ff7f00";
-    //   // Add more cases for other regions
-    //   default:
-    //     return "#ffffff";
-    // }
+    const regionData = geoStatus.find((region) => region.region === regionName);
+    const regionCount = regionData ? regionData.regionCount : 0;
+
+    switch (true) {
+      case regionCount > 8:
+        return "#120A8F";
+      case regionCount > 6:
+        return "#0033CC";
+      case regionCount > 4:
+        return "#4F86F7";
+      case regionCount > 2:
+        return "#553592";
+      case regionCount > 0:
+        return "#7DF9FF";
+      default:
+        return "#E0FFFF";
+    }
   };
 
   const cityStyle = (feature) => {
@@ -64,15 +63,17 @@ function Map() {
       opacity: 1,
       color: "black",
       dashArray: "3",
-      fillOpacity: 0.5,
+      fillOpacity: 0.7,
       fillColor: getColor(feature.properties.CTP_KOR_NM),
     };
   };
 
   const mouseoverColor = (event) => {
     event.target.setStyle({
-      color: "green",
-      // fillColor: "black",
+      weight: 2,
+      opacity: 1,
+      color: "black",
+      dashArray: "3",
       fillOpacity: 1,
     });
   };
@@ -82,21 +83,12 @@ function Map() {
       opacity: 1,
       color: "black",
       dashArray: "3",
-      fillOpacity: 0.5,
-      fillColor: getColor(event.target.feature.properties.CTP_KOR_NM),
-    });
-  };
-
-  const changeCityColor = (event) => {
-    event.target.setStyle({
-      color: "green",
-      fillColor: "red",
       fillOpacity: 0.7,
     });
   };
+
   const onEachCities = (city, layer) => {
     const regionName = city.properties.CTP_KOR_NM;
-    // const regionName = city.properties.CTP_ENG_NM;
 
     layer.bindPopup(regionName);
 
@@ -110,28 +102,19 @@ function Map() {
     });
   };
 
-  const MapEvents = () => {
-    useMapEvents({
-      zoomend: (e) => {
-        const newZoom = e.target.getZoom();
-        console.log("newZoom : " + newZoom);
-      },
-    });
-    return null;
-  };
-
   return (
     <MapContainer
       center={configMap.center}
       zoom={configMap.zoom}
       style={configMap.style}
+      minZoom={7}
+      maxZoom={10}
     >
       <TileLayer
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
       />
       <GeoJSON
-        // data={geojson}
         key={geojson}
         data={geojson}
         style={cityStyle}
@@ -142,11 +125,6 @@ function Map() {
           },
         }}
       />
-
-      <button onClick={openNewBoardPage} className="new_btn">
-        New
-      </button>
-      <MapEvents />
     </MapContainer>
   );
 }

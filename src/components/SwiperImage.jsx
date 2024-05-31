@@ -14,7 +14,6 @@ function SwiperImage({ data }) {
       style={{
         alignItems: "center",
         justifyContent: "center",
-        // border: "3px solid black",
         borderRadius: "10px",
       }}
     >

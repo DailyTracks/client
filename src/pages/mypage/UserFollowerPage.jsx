@@ -11,7 +11,6 @@ function UserFollowerPage() {
     axios
       .get(`/api/user/${id}/follower`)
       .then((response) => {
-        console.log(response);
         if (response.data.length === 0) {
           setUsers(null);
           return;

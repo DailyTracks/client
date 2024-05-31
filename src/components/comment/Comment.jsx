@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import classes from "../../styles/Comment.module.css";
 
 function Comment({ comment }) {
-  console.log(comment);
   const getRandomImageUrl = () => {
     const randomValue = Math.random().toString(36).substring(2, 15);
     return `https://source.boringavatars.com/beam?unique=${randomValue}`;
@@ -27,7 +26,6 @@ function Comment({ comment }) {
     <>
       <div className={classes.comment}>
         <img
-          // src="https://source.boringavatars.com/beam"
           src={getRandomImageUrl()}
           alt="profile"
           className={classes.profile_image}

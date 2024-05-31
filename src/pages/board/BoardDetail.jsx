@@ -22,13 +22,11 @@ function BoardDetail() {
   const [images, setImages] = useState(null);
   const submit = useSubmit();
   const location = useLocation();
-  console.log(location);
   const currentSearch = location.search;
   const { board } = useRouteLoaderData("board-detail");
   const myId = window.sessionStorage.getItem("user")
     ? JSON.parse(sessionStorage.getItem("user")).id
     : null;
-  // const myId = JSON.parse(sessionStorage.getItem("user")).id;
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -41,7 +39,6 @@ function BoardDetail() {
   useEffect(() => {
     board
       .then((result) => {
-        console.log(result);
         setImages(result.content.images);
         setLoadedBoard(result);
         setComments(result.comments);
@@ -52,6 +49,7 @@ function BoardDetail() {
       .catch((error) => {
         console.error("Error occurred:", error);
       });
+    // eslint-disable-next-line
   }, [board, location.key]);
 
   const likeHandler = () => {
@@ -60,12 +58,9 @@ function BoardDetail() {
       navigate(`/auth?mode=login&redirectURL=${location.pathname}`);
     }
 
-    console.log(loadedBoard);
-
     axios
       .post(`/api/board/${loadedBoard.id}/like`)
       .then((response) => {
-        console.log(response);
         navigate(".", { replace: true });
       })
       .catch((error) => {
@@ -107,16 +102,7 @@ function BoardDetail() {
                   className={classes.profile_image}
                 />
               </div>
-              {/* <p className={classes.region}>지역: {loadedBoard.region}</p> */}
-              {/* {images &&
-                images.map((image, index) => (
-                  <img
-                    key={index}
-                    src={process.env.REACT_APP_PROXY + image}
-                    alt={`${index}`}
-                    className={classes.image}
-                  />
-                ))} */}
+
               {images && <SwiperImage data={images} />}
               <p className={classes.content}>{loadedBoard.content.content}</p>
             </div>

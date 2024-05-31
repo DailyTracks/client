@@ -10,10 +10,14 @@
   justify-content: space-between;
   align-items: center;
   margin-top: 0.5rem;
-  margin-bottom: 1rem;
   border-bottom: 2px solid black;
   /* background-color: #222; */
-  background: linear-gradient(to right, #222 0%, rgb(94, 94, 94) 50%, #222 100%);
+  background: linear-gradient(
+    to right,
+    #222 0%,
+    rgb(94, 94, 94) 50%,
+    #222 100%
+  );
 }
 
 .logo {
@@ -23,7 +27,7 @@
   padding: 0 2rem;
   color: black;
   font-weight: bold;
-  color: whitesmoke;                                                          
+  color: whitesmoke;
 }
 
 .entryarea {
@@ -83,30 +87,53 @@
   margin: 0;
   align-items: center;
   height: 60px;
+  text-align: center;
+}
+
+.auth li {
+  display: flex;
+  height: 100%;
+  /* align-items: center; */
+  text-align: center; 
 }
 
 .auth a {
+  display: block;
   text-decoration: none;
+  letter-spacing: 0.2rem;
   font-size: 1.2rem;
   font-weight: 700;
+  height: 100%;
   padding: 0 1.5rem;
+  border: none;
+  cursor: pointer;
   color: whitesmoke;
-  letter-spacing: 0.2rem;
-  /* border: 1px solid yellow; */
+  line-height: 60px;
+}
+
+.auth i {
+  line-height: 60px;
+
+  &:hover {
+    line-height: 50px;
+  }
 }
 
 .auth a:hover,
 .auth button:hover,
 .auth a.active {
-  text-decoration: underline;
+  line-height: 50px;
+  border-bottom: 5px solid white;
 }
 
 .auth button {
   border: none;
+  cursor: pointer;
+  height: 100%;
   font-size: 1.2rem;
   font-weight: bold;
   padding: 0 2rem;
-  color: #808080;
+  color: whitesmoke;
   background-color: transparent;
 }
 
@@ -211,4 +238,3 @@
     padding: 0 1rem;
   }
 }
-

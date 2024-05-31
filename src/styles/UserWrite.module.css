@@ -1,0 +1,27 @@
+.board {
+  display: flex;
+  width: 100%;
+  border-bottom: 1px solid gray;
+  padding: 20px;
+  margin-bottom: 50px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.title {
+  font-weight: 600;
+  margin-bottom: 5px;
+  letter-spacing: 3px;
+}
+
+
+.createdAt {
+  color: #666666;
+  margin-top: 20px;
+}
+
+.image {
+  width: 100px;
+  object-fit: contain;
+}

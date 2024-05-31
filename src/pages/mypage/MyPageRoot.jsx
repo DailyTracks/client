@@ -19,35 +19,34 @@ function MyPageRoot() {
   return (
     <>
       {isLogin && (
-        <>
+        <div>
           <Header />
-
-          <div className={classes.leftNav}>
-            <ul>
-              <li>
-                <NavLink
-                  to=""
-                  className={({ isActive }) =>
-                    isActive ? classes.active : undefined
-                  }
-                  end
-                >
-                  <i className="fa-regular fa-user"></i>내 정보
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to={"following"}
-                  className={({ isActive }) =>
-                    isActive ? classes.active : undefined
-                  }
-                  end
-                >
-                  <i className="fa-solid fa-user-group"></i>
-                  팔로우
-                </NavLink>
-              </li>
-              <>
+          <div style={{ marginTop: "10px", display: "flex" }}>
+            <div className={classes.leftNav}>
+              <ul>
+                <li>
+                  <NavLink
+                    to=""
+                    className={({ isActive }) =>
+                      isActive ? classes.active : undefined
+                    }
+                    end
+                  >
+                    <i className="fa-regular fa-user"></i>내 정보
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to={"following"}
+                    className={({ isActive }) =>
+                      isActive ? classes.active : undefined
+                    }
+                    end
+                  >
+                    <i className="fa-solid fa-user-group"></i>
+                    팔로우
+                  </NavLink>
+                </li>
                 <li>
                   <NavLink
                     to={"follower"}
@@ -60,23 +59,37 @@ function MyPageRoot() {
                     팔로워
                   </NavLink>
                 </li>
-              </>
-              <li>
-                <NavLink
-                  to={"nothing"}
-                  className={({ isActive }) =>
-                    isActive ? classes.active : undefined
-                  }
-                  end
-                >
-                  <i className="fa-solid fa-plus"></i>
-                  추가 정보
-                </NavLink>
-              </li>
-            </ul>
+                <li>
+                  <NavLink
+                    to={"written"}
+                    className={({ isActive }) =>
+                      isActive ? classes.active : undefined
+                    }
+                    end
+                  >
+                    <i className="fa-regular fa-newspaper"></i>
+                    나의 글
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to={"nothing"}
+                    className={({ isActive }) =>
+                      isActive ? classes.active : undefined
+                    }
+                    end
+                  >
+                    <i className="fa-solid fa-plus"></i>
+                    추가 정보
+                  </NavLink>
+                </li>
+              </ul>
+            </div>
+            <div style={{ width: "100%" }}>
+              <Outlet />
+            </div>
           </div>
-          <Outlet />
-        </>
+        </div>
       )}
     </>
   );

@@ -28,6 +28,7 @@ import { action as userFormAction } from "./components/user/UserEditForm";
 import SearchPage from "./pages/SearchPage";
 import { loader as searchLoader } from "./pages/SearchPage";
 import UserFollowerPage from "./pages/mypage/UserFollowerPage";
+import UserWrite from "./pages/mypage/UserWrite";
 
 const router = createBrowserRouter([
   {
@@ -72,7 +73,6 @@ const router = createBrowserRouter([
               {
                 path: "edit",
                 element: <EditBoard />,
-                // action: boardFormAction,
               },
               {
                 path: "new",
@@ -84,7 +84,6 @@ const router = createBrowserRouter([
           {
             path: "new",
             element: <NewBoard />,
-            // action: boardFormAction,
           },
         ],
       },
@@ -105,6 +104,7 @@ const router = createBrowserRouter([
       { path: "following", element: <UserFollowingPage /> },
       { path: "follower", element: <UserFollowerPage /> },
       { path: "edit", element: <UserEditPage />, action: userFormAction },
+      { path: "written", element: <UserWrite /> },
     ],
   },
   {

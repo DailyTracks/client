@@ -2,9 +2,10 @@ import React, { useState, useEffect, useRef } from "react";
 import io from "socket.io-client";
 import Header from "../components/Header";
 import { Container, Row, Col, ListGroup, Form, Button } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.css";
 import axios from "axios";
 
-const socket = io(process.env.REACT_APP_PROXY);
+const socket = io(process.env.REACT_APP_SOCKET_PROXY);
 
 // 채팅방 상대방 단방향 매칭
 function ChatRoot() {
@@ -35,7 +36,6 @@ function ChatRoot() {
         });
         setMe(userResponse.data.user.id);
         const data = response.data;
-        console.log(data);
         setChatData(data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -67,14 +67,11 @@ function ChatRoot() {
 
   useEffect(() => {
     if (room !== 0 && me !== 0) {
-      // 메시지 수신
       const handleMessages = (messages) => {
-        console.log(messages);
         setMessages(messages);
       };
 
       const handleMessage = (message) => {
-        console.log(message);
         setMessages((prevMessages) => [...prevMessages, message]);
       };
 

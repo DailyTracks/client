@@ -29,29 +29,24 @@ function AuthForm() {
         const res = await axios.get("/api/auth", {
           withCredentials: true,
         });
-        //TODO: 오류 처리해주세요
-
         console.log(res);
-        console.log(res.data);
-        console.log(searchParams);
-
         setUserData({
           provider: searchParams.get("provider"),
           name: searchParams.get("username"),
           email: searchParams.get("email"),
           id: searchParams.get("id"),
         });
-        console.log(userData);
       } catch (error) {
         console.error(error);
       }
     };
 
     fetchData();
+    // eslint-disable-next-line
   }, []);
 
   return (
-    <>
+    <div>
       <Form method="post" className={classes.form}>
         {!isLogin ? (
           <>
@@ -108,14 +103,7 @@ function AuthForm() {
                       <i>Email</i>
                     </div>
                     <div className={classes.inputBox}>
-                      <input
-                        id="userId"
-                        type="text"
-                        name="userId"
-                        // value={userId}
-                        // onChange={(e) => setUserId(e.target.value)}
-                        required
-                      />
+                      <input id="userId" type="text" name="userId" required />
                       <i>Nickname</i>
                     </div>
                     <div className={classes.inputBox}>
@@ -123,8 +111,6 @@ function AuthForm() {
                         id="password"
                         type="password"
                         name="password"
-                        // value={password}
-                        // onChange={(e) => setPassword(e.target.value)}
                         required
                       />
                       <i>Password</i>
@@ -169,36 +155,39 @@ function AuthForm() {
           </>
         )}
       </Form>
-    </>
+    </div>
   );
 }
 
 export default AuthForm;
 
 export async function action({ request, params }) {
-  // const method = request.method;
   const data = await request.formData();
   const id = data.get("id");
 
   const mode = new URL(request.url).searchParams.get("mode");
 
   if (mode === "signup") {
-    const response = await axios.post(
-      `/api/user/${id}/profile`,
-      {
-        userId: data.get("userId"),
-        password: data.get("password"),
-      },
-      {
-        headers: {
-          "Content-type": "application/json",
-          Accept: "application/json",
+    axios
+      .post(
+        `/api/user/${id}/profile`,
+        {
+          userId: data.get("userId"),
+          password: data.get("password"),
         },
-      },
-      { withCredentials: true }
-    );
-
-    alert("회원가입이 완료되었습니다. 로그인 해주세요.");
+        {
+          headers: {
+            "Content-type": "application/json",
+            Accept: "application/json",
+          },
+        },
+        { withCredentials: true }
+      )
+      .then((response) => {
+        console.log(response);
+        alert("회원가입이 완료되었습니다. 로그인 해주세요.");
+      })
+      .catch((error) => console.log(error));
 
     return redirect("..");
   } else if (mode === "login") {
@@ -229,13 +218,9 @@ export async function action({ request, params }) {
       return null;
     }
 
-    console.log(response);
-    console.log(response.data);
     sessionStorage.setItem("isLogin", "true");
     sessionStorage.setItem("user", JSON.stringify(response.data.user));
 
-    // console.log("LOGIN!");
-    // return redirect("..");
     const redirectUrl =
       new URL(request.url).searchParams.get("redirectURL") || "..";
     return redirect(redirectUrl);
